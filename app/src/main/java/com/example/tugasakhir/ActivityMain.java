@@ -31,6 +31,7 @@ public class ActivityMain extends AppCompatActivity {
     private String uID, allSerialNumber, serialNumberOwned, allLocation, allPlant;
     private ArrayList<String> serialNumberOwnedArrayList, allSerialNumberArrayList, allLocationArrayList, allPlantArrayList, locationOwnedArrayList, plantOwnedArrayList;
     private int i, j;
+    private CustomDeviceListAdapterActivityMain customDeviceListAdapterActivityMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,5 +154,16 @@ public class ActivityMain extends AppCompatActivity {
                 }
             }
         }
+
+        populateDeviceListView();
+    }
+
+    private void populateDeviceListView(){
+
+        customDeviceListAdapterActivityMain = new CustomDeviceListAdapterActivityMain(this,
+                serialNumberOwnedArrayList.toArray(new String[serialNumberOwnedArrayList.size()]),
+                locationOwnedArrayList.toArray(new String[locationOwnedArrayList.size()]),
+                plantOwnedArrayList.toArray(new String[plantOwnedArrayList.size()]));
+        devicesListView.setAdapter(customDeviceListAdapterActivityMain);
     }
 }

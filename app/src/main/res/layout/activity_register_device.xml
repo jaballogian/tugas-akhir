@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/dont_have_a_device_buy_here"
-        android:id="@+id/buyHereTextViewActivityRegisterDevice"
+        android:id="@+id/dontHaveADeviceTextViewActivityRegisterDevice"
         android:layout_above="@+id/registerButtonActivityRegisterDevice"/>
 
     <Button

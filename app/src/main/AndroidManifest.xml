@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ActivityRegisterDevice"/>
+        <activity android:name=".ActivityLogin"/>
         <activity android:name=".ActivityMain" />
         <activity android:name=".ActivityRegister" />
         <activity android:name=".ActivitySplashScreen" />
-        <activity android:name=".ActivityLogin">
+        <activity android:name=".ActivityRegisterDevice">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

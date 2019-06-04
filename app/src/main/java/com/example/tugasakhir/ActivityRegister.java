@@ -245,7 +245,8 @@ public class ActivityRegister extends AppCompatActivity implements DatePickerDia
 
                 if(task.isSuccessful()){
 
-                    moveToActivityMain();
+                    moveToActivityRegisterDevice();
+                    Toast.makeText(ActivityRegister.this, getString(R.string.welcome), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -259,11 +260,11 @@ public class ActivityRegister extends AppCompatActivity implements DatePickerDia
         loading.show();
     }
 
-    private void moveToActivityMain(){
+    private void moveToActivityRegisterDevice(){
 
-        Intent toActivityMain = new Intent(ActivityRegister.this, ActivityMain.class);
-        toActivityMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(toActivityMain);
+        Intent toActivityRegisterDevice = new Intent(ActivityRegister.this, ActivityRegisterDevice.class);
+        toActivityRegisterDevice.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(toActivityRegisterDevice);
         finish();
     }
 }

@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import me.anwarshahriar.calligrapher.Calligrapher;
+
 public class ActivityLogin extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
@@ -29,6 +31,9 @@ public class ActivityLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Calligrapher calligrapher = new Calligrapher(this);
+        calligrapher.setFont(this, "PRODUCT_SANS.ttf", true);
 
         emailEditText = (EditText) findViewById(R.id.emailEditTextActivityLogin);
         passwordEditText = (EditText) findViewById(R.id.passwordEditTextActivityLogin);

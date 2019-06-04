@@ -10,6 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import me.anwarshahriar.calligrapher.Calligrapher;
 
@@ -25,11 +30,12 @@ public class ActivityRegisterDevice extends AppCompatActivity {
     private EditText serialNumberEditText, passwordEditText;
     private TextView dontHaveADeviceTextView;
     private Button registerButton;
-    private String serialNumberFromUser, passwordFromUser, serialNumberFromFirebase, passwordFromFirebase;
-    private DatabaseReference devicesReference;
+    private String serialNumberFromUser, passwordFromUser, serialNumberFromFirebase, passwordFromFirebase, uID;
+    private DatabaseReference devicesReference, databaseReference;
     private ArrayList<String> serialNumberArrayList, passwordArrayList;
     private int i, j;
     private boolean isDeviceRegistered;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,7 @@ public class ActivityRegisterDevice extends AppCompatActivity {
         Calligrapher calligrapher = new Calligrapher(this);
         calligrapher.setFont(this, "PRODUCT_SANS.ttf", true);
 
-        devicesReference = FirebaseDatabase.getInstance().getReference().child("devices").child("id");
+        devicesReference = FirebaseDatabase.getInstance().getReference().child("devices");
 
         serialNumberEditText = (EditText) findViewById(R.id.serialNumberEditTextActivityRegisterDevice);
         passwordEditText = (EditText) findViewById(R.id.passwordEditTextActivityRegisterDevice);
@@ -87,7 +93,7 @@ public class ActivityRegisterDevice extends AppCompatActivity {
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
 
-                    serialNumberFromFirebase = ds.child("id").getValue().toString();
+                    serialNumberFromFirebase = ds.getKey();
                     passwordFromFirebase = ds.child("password").getValue().toString();
 
                     serialNumberArrayList.add(serialNumberFromFirebase);
@@ -111,6 +117,7 @@ public class ActivityRegisterDevice extends AppCompatActivity {
             if(serialNumberFromUser.equals(serialNumberArrayList.get(i))){
 
                 isDeviceRegistered = true;
+                j = i;
             }
         }
 
@@ -126,8 +133,7 @@ public class ActivityRegisterDevice extends AppCompatActivity {
             }
             else {
 
-                moveToActivityMain();
-                Toast.makeText(ActivityRegisterDevice.this, getString(R.string.welcome), Toast.LENGTH_LONG).show();
+                saveDeviceToDatabase();
             }
         }
     }
@@ -138,5 +144,25 @@ public class ActivityRegisterDevice extends AppCompatActivity {
         toActivityMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(toActivityMain);
         finish();
+    }
+
+    private void saveDeviceToDatabase(){
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        uID = currentUser.getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uID).child("Devices").child(serialNumberFromUser);
+
+        databaseReference.setValue("true").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if(task.isSuccessful()){
+
+                    moveToActivityMain();
+                    Toast.makeText(ActivityRegisterDevice.this, getString(R.string.welcome), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 }

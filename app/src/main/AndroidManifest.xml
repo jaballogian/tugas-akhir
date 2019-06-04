@@ -11,9 +11,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".ActivityRegisterDevice"/>
         <activity android:name=".ActivityMain" />
-        <activity android:name=".ActivityLogin" />
+        <activity android:name=".ActivityRegister" />
         <activity android:name=".ActivitySplashScreen" />
-        <activity android:name=".ActivityRegister">
+        <activity android:name=".ActivityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

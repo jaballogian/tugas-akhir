@@ -29,6 +29,7 @@
     <string name="please_select_a_valid_gender">Please select a valid gender</string>
     <string name="please_select_a_valid_role">Please select a valid role</string>
     <string name="birth_date">Birth date :</string>
+    <string name="email_and_password_is_incorrect">Email and password is incorrect</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

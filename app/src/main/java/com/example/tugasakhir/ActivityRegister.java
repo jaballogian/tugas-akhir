@@ -192,12 +192,8 @@ public class ActivityRegister extends AppCompatActivity implements DatePickerDia
 
         if(password.equals(confirmPassword)){
 
+            setProgressDialog();
             registerUser();
-
-            loading.setTitle(R.string.processing);
-            loading.setMessage(getString(R.string.please_wait));
-            loading.setCanceledOnTouchOutside(false);
-            loading.show();
         }
         else {
 
@@ -253,6 +249,14 @@ public class ActivityRegister extends AppCompatActivity implements DatePickerDia
                 }
             }
         });
+    }
+
+    private void setProgressDialog(){
+
+        loading.setTitle(R.string.processing);
+        loading.setMessage(getString(R.string.please_wait));
+        loading.setCanceledOnTouchOutside(false);
+        loading.show();
     }
 
     private void moveToActivityMain(){

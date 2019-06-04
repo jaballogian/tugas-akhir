@@ -9,14 +9,11 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/fullnameTextInputLayoutActivityRegister"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp">
+        android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/fullnameEditTextActivityLogin"
+            android:id="@+id/fullnameEditTextActivityRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/fullname"
@@ -29,15 +26,11 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/phoneNumberTextInputLayoutActivityLogin"
-        android:layout_below="@+id/passwordTextInputLayoutActivitySignUp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp">
+        android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/phoneNumberEditTextActivityLogin"
+            android:id="@+id/phoneNumberEditTextActivityRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/phone_number"
@@ -51,14 +44,11 @@
 
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/emailTextInputLayoutActivitySignUp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp">
+        android:layout_height="wrap_content">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/emailEditTextActivityLogin"
+            android:id="@+id/emailEditTextActivityRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
@@ -71,17 +61,13 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/passwordTextInputLayoutActivitySignUp"
-        android:layout_below="@+id/emailTextInputLayoutActivitySignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
         app:passwordToggleEnabled="true"
         app:passwordToggleDrawable="@drawable/ic_remove_red_eye_black_24dp">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/passwordEditTextActivityLogin"
+            android:id="@+id/passwordEditTextActivityRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
@@ -93,18 +79,24 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <Button
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/selectGenderButtonActivityRegister"
-        android:text="@string/select_gender"
-        android:textAllCaps="false"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:padding="10dp"
-        android:textSize="16sp"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/white"/>
+        app:passwordToggleEnabled="true"
+        app:passwordToggleDrawable="@drawable/ic_remove_red_eye_black_24dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/confirmPasswordEditTextActivityRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:layout_width="match_parent"
@@ -112,25 +104,24 @@
         android:id="@+id/selectBirthDateButtonActivityRegister"
         android:text="@string/select_birth_date"
         android:textAllCaps="false"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
         android:padding="10dp"
         android:textSize="16sp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/black"
         android:textColor="@color/white"/>
 
-    <Button
+    <Spinner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/selectPositionButtonActivityRegister"
-        android:text="@string/select_position"
-        android:textAllCaps="false"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:padding="10dp"
-        android:textSize="16sp"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/white"/>
+        android:layout_height="50dp"
+        android:id="@+id/selectGenderSpinnerActivityRegister">
+
+    </Spinner>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/selectRoleSpinnerActivityRegister">
+
+    </Spinner>
 
     <Button
         android:layout_width="match_parent"
@@ -138,10 +129,8 @@
         android:id="@+id/registerButtonActivityRegister"
         android:text="@string/register"
         android:textAllCaps="false"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
         android:padding="10dp"
         android:textSize="16sp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/black"
         android:textColor="@color/white"/>
 </LinearLayout>

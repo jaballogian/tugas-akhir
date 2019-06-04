@@ -9,8 +9,40 @@
     <string name="register">Register</string>
     <string name="select_gender">Select Gender</string>
     <string name="select_birth_date">Select Birth Date</string>
-    <string name="select_position">Select Position</string>
+    <string name="select_role">Select Role</string>
     <string name="dont_have_an_account_register_here">Don\'t have an account? Register here</string>
     <string name="serial_number">Serial Number</string>
     <string name="dont_have_a_device_buy_here">Don\'t have a device? Buy here</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="studens">Student</string>
+    <string name="lecturer">Lecturer</string>
+    <string name="researcher">Researcher</string>
+    <string name="farmer">Farmer</string>
+    <string name="garden_owner">Garden Owner</string>
+    <string name="password_and_confirm_password_doesnt_match">Password and Confirm Password doesn\'t match</string>
+    <string name="please_fill_all_the_fields">Please fill all the fields</string>
+    <string name="processing">Processing</string>
+    <string name="please_wait">Please wait</string>
+    <string name="choose_different_email_and_password">Choose different email and password</string>
+    <string name="please_select_a_valid_gender">Please select a valid gender</string>
+    <string name="please_select_a_valid_role">Please select a valid role</string>
+    <string name="birth_date">Birth date :</string>
+
+    <string-array name="select_gender_array">
+        <item>@string/select_gender</item>
+        <item>@string/male</item>
+        <item>@string/female</item>
+    </string-array>
+
+    <string-array name="select_role_array">
+        <item>@string/select_role</item>
+        <item>@string/studens</item>
+        <item>@string/lecturer</item>
+        <item>@string/researcher</item>
+        <item>@string/farmer</item>
+        <item>@string/garden_owner</item>
+    </string-array>
+
 </resources>

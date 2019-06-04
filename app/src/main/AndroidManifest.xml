@@ -12,8 +12,8 @@
         <activity android:name=".ActivityLogin"/>
         <activity android:name=".ActivityMain" />
         <activity android:name=".ActivityRegister" />
-        <activity android:name=".ActivitySplashScreen" />
-        <activity android:name=".ActivityRegisterDevice">
+        <activity android:name=".ActivityRegisterDevice" />
+        <activity android:name=".ActivitySplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

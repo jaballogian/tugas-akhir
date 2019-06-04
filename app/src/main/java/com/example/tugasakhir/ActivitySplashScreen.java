@@ -29,9 +29,9 @@ public class ActivitySplashScreen extends AppCompatActivity {
             @Override
             public void run(){
 
-                Intent toMapsActivity = new Intent(ActivitySplashScreen.this, ActivityMain.class);
-                toMapsActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(toMapsActivity);
+                Intent toActivityMain = new Intent(ActivitySplashScreen.this, ActivityMain.class);
+                toActivityMain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(toActivityMain);
                 finish();
             }
         },SPLASH_TIMED_OUT);

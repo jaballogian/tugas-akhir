@@ -18,15 +18,17 @@ public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
 
     Activity activity;
     String[] deviceID, location, plant, status;
+    Integer[] image;
     LayoutInflater layoutInflater;
 
-    public CustomDeviceListAdapterActivityMain (Activity activity, String[] deviceID, String[] location, String[] plant, String[] status){
+    public CustomDeviceListAdapterActivityMain (Activity activity, String[] deviceID, String[] location, String[] plant, String[] status, Integer[] image){
 
         this.activity = activity;
         this.deviceID = deviceID;
         this.location = location;
         this.plant = plant;
         this.status = status;
+        this.image = image;
     }
 
     @Override
@@ -60,6 +62,7 @@ public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
         plantTextView.setText(plant[position]);
         locationTextView.setText(location[position]);
         statusTextView.setText(status[position]);
+        plantCircleImageView.setImageResource(image[position]);
 
         return view;
     }

@@ -20,6 +20,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
     private TextView serialNumberTextView, plantTextView, locationTextView, statusTextView, ecTextView, phTextView, flowTextView, intensityTextView;
     private Bundle readDataFromActivityMain;
     private String serialNumber, ec, flow, intensity, location, ph, plant, status;
+    private int image;
     private DatabaseReference selectedDeviceReference;
 
     @Override
@@ -39,6 +40,9 @@ public class ActivityDeviceDetail extends AppCompatActivity {
 
         readDataFromActivityMain = getIntent().getExtras();
         serialNumber = readDataFromActivityMain.getString("serialNumber");
+        image = readDataFromActivityMain.getInt("image");
+
+        plantCircleImageView.setImageResource(image);
 
         selectedDeviceReference = FirebaseDatabase.getInstance().getReference().child("Devices").child(serialNumber);
 

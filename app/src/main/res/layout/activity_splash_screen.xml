@@ -11,7 +11,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/lettuce"
+        android:background="@color/black"
         android:id="@+id/logoImageViewActivitySplashScreen"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>

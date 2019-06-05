@@ -27,13 +27,14 @@ public class ActivityMain extends AppCompatActivity {
 
     private TextView registerDeviceTextView;
     private ListView devicesListView;
-    private DatabaseReference devicesIDReference, allDevicesReference;
+    private DatabaseReference devicesIDReference, allDevicesReference, allRegisteredPlantsReference;
     private FirebaseUser currentUser;
-    private String uID, allSerialNumber, serialNumberOwned, allLocation, allPlant, allStatus;
-    private ArrayList<String> serialNumberOwnedArrayList, allSerialNumberArrayList, allLocationArrayList, allPlantArrayList, allStatusArrayList;
+    private String uID, allSerialNumber, serialNumberOwned, allLocation, allPlant, allStatus, allRegisteredPlants;
+    private ArrayList<String> serialNumberOwnedArrayList, allSerialNumberArrayList, allLocationArrayList, allPlantArrayList, allStatusArrayList, allRegisteredPlantsArrayList;
     private ArrayList<String> locationOwnedArrayList, plantOwnedArrayList, statusOwnedArrayList;
     private int i, j;
     private CustomDeviceListAdapterActivityMain customDeviceListAdapterActivityMain;
+    private ArrayList<Integer> allImagePlantsArrayList, imageOwnedPlantArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class ActivityMain extends AppCompatActivity {
 
         devicesIDReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uID).child("Devices");
         allDevicesReference = FirebaseDatabase.getInstance().getReference().child("Devices");
+        allRegisteredPlantsReference = FirebaseDatabase.getInstance().getReference().child("Optimal Parameters");
 
         serialNumberOwnedArrayList = new ArrayList<String>();
         allSerialNumberArrayList = new ArrayList<String>();
@@ -60,8 +62,13 @@ public class ActivityMain extends AppCompatActivity {
         plantOwnedArrayList = new ArrayList<String>();
         allStatusArrayList = new ArrayList<String>();
         statusOwnedArrayList = new ArrayList<String>();
+        allRegisteredPlantsArrayList = new ArrayList<String>();
+        allImagePlantsArrayList = new ArrayList<Integer>();
+        imageOwnedPlantArrayList = new ArrayList<Integer>();
 
         checkingUser();
+
+        insertAllImagesToArray();
 
         readDevicesOwnedFromFirebase();
 
@@ -79,6 +86,7 @@ public class ActivityMain extends AppCompatActivity {
 
                 Intent toActivityDeviceDetail = new Intent(ActivityMain.this, ActivityDeviceDetail.class);
                 toActivityDeviceDetail.putExtra("serialNumber", serialNumberOwnedArrayList.get(position));
+                toActivityDeviceDetail.putExtra("image", imageOwnedPlantArrayList.get(position));
                 startActivity(toActivityDeviceDetail);
             }
         });
@@ -147,7 +155,7 @@ public class ActivityMain extends AppCompatActivity {
                     allStatusArrayList.add(allStatus);
                 }
 
-                readParametersFromDevices();
+                readAllRegisteredPlantsFromFirebase();
             }
 
             @Override
@@ -172,7 +180,7 @@ public class ActivityMain extends AppCompatActivity {
             }
         }
 
-        populateDeviceListView();
+        compareOwnedAndAllRegisteredPlants();
     }
 
     private void populateDeviceListView(){
@@ -181,7 +189,87 @@ public class ActivityMain extends AppCompatActivity {
                 serialNumberOwnedArrayList.toArray(new String[serialNumberOwnedArrayList.size()]),
                 locationOwnedArrayList.toArray(new String[locationOwnedArrayList.size()]),
                 plantOwnedArrayList.toArray(new String[plantOwnedArrayList.size()]),
-                statusOwnedArrayList.toArray(new String[statusOwnedArrayList.size()]));
+                statusOwnedArrayList.toArray(new String[statusOwnedArrayList.size()]),
+                imageOwnedPlantArrayList.toArray(new Integer[imageOwnedPlantArrayList.size()]));
         devicesListView.setAdapter(customDeviceListAdapterActivityMain);
+    }
+
+    private void compareOwnedAndAllRegisteredPlants(){
+
+        for(i = 0; i < plantOwnedArrayList.size(); i++){
+
+            for (j = 0; j < allRegisteredPlantsArrayList.size(); j++){
+
+                if(plantOwnedArrayList.get(i).equals(allRegisteredPlantsArrayList.get(j))){
+
+                    imageOwnedPlantArrayList.add(allImagePlantsArrayList.get(j));
+                }
+            }
+        }
+
+        populateDeviceListView();
+    }
+
+    private void readAllRegisteredPlantsFromFirebase(){
+
+        allRegisteredPlantsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+
+                    allRegisteredPlants = ds.getKey();
+                    allRegisteredPlantsArrayList.add(allRegisteredPlants);
+                }
+
+                readParametersFromDevices();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void insertAllImagesToArray(){
+
+        allImagePlantsArrayList.add(R.drawable.plant_artichoke);
+        allImagePlantsArrayList.add(R.drawable.plant_asparagus);
+        allImagePlantsArrayList.add(R.drawable.plant_beans);
+        allImagePlantsArrayList.add(R.drawable.plant_beetroot);
+        allImagePlantsArrayList.add(R.drawable.plant_broccoli);
+        allImagePlantsArrayList.add(R.drawable.plant_cabbage);
+        allImagePlantsArrayList.add(R.drawable.plant_capsicum);
+        allImagePlantsArrayList.add(R.drawable.plant_carrot);
+        allImagePlantsArrayList.add(R.drawable.plant_cauliflower);
+        allImagePlantsArrayList.add(R.drawable.plant_celeriac);
+        allImagePlantsArrayList.add(R.drawable.plant_celery);
+        allImagePlantsArrayList.add(R.drawable.plant_chili);
+        allImagePlantsArrayList.add(R.drawable.plant_cucumber);
+        allImagePlantsArrayList.add(R.drawable.plant_eggplant);
+        allImagePlantsArrayList.add(R.drawable.plant_garlic);
+        allImagePlantsArrayList.add(R.drawable.plant_gia_lan);
+        allImagePlantsArrayList.add(R.drawable.plant_ginger);
+        allImagePlantsArrayList.add(R.drawable.plant_kale);
+        allImagePlantsArrayList.add(R.drawable.plant_leek);
+        allImagePlantsArrayList.add(R.drawable.plant_lettuce);
+        allImagePlantsArrayList.add(R.drawable.plant_onion);
+        allImagePlantsArrayList.add(R.drawable.plant_pak_or_bok_choy);
+        allImagePlantsArrayList.add(R.drawable.plant_potato);
+        allImagePlantsArrayList.add(R.drawable.plant_pumpkin);
+        allImagePlantsArrayList.add(R.drawable.plant_radish_red);
+        allImagePlantsArrayList.add(R.drawable.plant_radish_white);
+        allImagePlantsArrayList.add(R.drawable.plant_shallot);
+        allImagePlantsArrayList.add(R.drawable.plant_silverbeet);
+        allImagePlantsArrayList.add(R.drawable.plant_snow_peas);
+        allImagePlantsArrayList.add(R.drawable.plant_spinach);
+        allImagePlantsArrayList.add(R.drawable.plant_sugar_snap_peas);
+        allImagePlantsArrayList.add(R.drawable.plant_sweet_corn);
+        allImagePlantsArrayList.add(R.drawable.plant_sweet_potato);
+        allImagePlantsArrayList.add(R.drawable.plant_tomato);
+        allImagePlantsArrayList.add(R.drawable.plant_turnip);
+        allImagePlantsArrayList.add(R.drawable.plant_wombok);
+        allImagePlantsArrayList.add(R.drawable.plant_zucchini);
     }
 }

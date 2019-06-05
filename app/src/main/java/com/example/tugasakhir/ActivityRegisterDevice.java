@@ -45,7 +45,7 @@ public class ActivityRegisterDevice extends AppCompatActivity {
         Calligrapher calligrapher = new Calligrapher(this);
         calligrapher.setFont(this, "PRODUCT_SANS.ttf", true);
 
-        devicesReference = FirebaseDatabase.getInstance().getReference().child("devices");
+        devicesReference = FirebaseDatabase.getInstance().getReference().child("Devices");
 
         serialNumberEditText = (EditText) findViewById(R.id.serialNumberEditTextActivityRegisterDevice);
         passwordEditText = (EditText) findViewById(R.id.passwordEditTextActivityRegisterDevice);

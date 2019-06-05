@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,8 +29,9 @@ public class ActivityMain extends AppCompatActivity {
     private ListView devicesListView;
     private DatabaseReference devicesIDReference, allDevicesReference;
     private FirebaseUser currentUser;
-    private String uID, allSerialNumber, serialNumberOwned, allLocation, allPlant;
-    private ArrayList<String> serialNumberOwnedArrayList, allSerialNumberArrayList, allLocationArrayList, allPlantArrayList, locationOwnedArrayList, plantOwnedArrayList;
+    private String uID, allSerialNumber, serialNumberOwned, allLocation, allPlant, allStatus;
+    private ArrayList<String> serialNumberOwnedArrayList, allSerialNumberArrayList, allLocationArrayList, allPlantArrayList, allStatusArrayList;
+    private ArrayList<String> locationOwnedArrayList, plantOwnedArrayList, statusOwnedArrayList;
     private int i, j;
     private CustomDeviceListAdapterActivityMain customDeviceListAdapterActivityMain;
 
@@ -48,7 +50,7 @@ public class ActivityMain extends AppCompatActivity {
         uID = currentUser.getUid();
 
         devicesIDReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uID).child("Devices");
-        allDevicesReference = FirebaseDatabase.getInstance().getReference().child("devices");
+        allDevicesReference = FirebaseDatabase.getInstance().getReference().child("Devices");
 
         serialNumberOwnedArrayList = new ArrayList<String>();
         allSerialNumberArrayList = new ArrayList<String>();
@@ -56,6 +58,8 @@ public class ActivityMain extends AppCompatActivity {
         allPlantArrayList = new ArrayList<String>();
         locationOwnedArrayList = new ArrayList<String>();
         plantOwnedArrayList = new ArrayList<String>();
+        allStatusArrayList = new ArrayList<String>();
+        statusOwnedArrayList = new ArrayList<String>();
 
         checkingUser();
 
@@ -66,6 +70,16 @@ public class ActivityMain extends AppCompatActivity {
             public void onClick(View v) {
 
                 moveToActivityRegisterDevice();
+            }
+        });
+
+        devicesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent toActivityDeviceDetail = new Intent(ActivityMain.this, ActivityDeviceDetail.class);
+                toActivityDeviceDetail.putExtra("serialNumber", serialNumberOwnedArrayList.get(position));
+                startActivity(toActivityDeviceDetail);
             }
         });
     }
@@ -125,10 +139,12 @@ public class ActivityMain extends AppCompatActivity {
                     allSerialNumber = ds.getKey();
                     allLocation = ds.child("location").getValue().toString();
                     allPlant = ds.child("plant").getValue().toString();
+                    allStatus = ds.child("status").getValue().toString();
 
                     allSerialNumberArrayList.add(allSerialNumber);
                     allLocationArrayList.add(allLocation);
                     allPlantArrayList.add(allPlant);
+                    allStatusArrayList.add(allStatus);
                 }
 
                 readParametersFromDevices();
@@ -151,6 +167,7 @@ public class ActivityMain extends AppCompatActivity {
 
                     locationOwnedArrayList.add(allLocationArrayList.get(j));
                     plantOwnedArrayList.add(allPlantArrayList.get(j));
+                    statusOwnedArrayList.add(allStatusArrayList.get(j));
                 }
             }
         }
@@ -163,7 +180,8 @@ public class ActivityMain extends AppCompatActivity {
         customDeviceListAdapterActivityMain = new CustomDeviceListAdapterActivityMain(this,
                 serialNumberOwnedArrayList.toArray(new String[serialNumberOwnedArrayList.size()]),
                 locationOwnedArrayList.toArray(new String[locationOwnedArrayList.size()]),
-                plantOwnedArrayList.toArray(new String[plantOwnedArrayList.size()]));
+                plantOwnedArrayList.toArray(new String[plantOwnedArrayList.size()]),
+                statusOwnedArrayList.toArray(new String[statusOwnedArrayList.size()]));
         devicesListView.setAdapter(customDeviceListAdapterActivityMain);
     }
 }

@@ -17,15 +17,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
 
     Activity activity;
-    String[] deviceID, location, plant;
+    String[] deviceID, location, plant, status;
     LayoutInflater layoutInflater;
 
-    public CustomDeviceListAdapterActivityMain (Activity activity, String[] deviceID, String[] location, String[] plant){
+    public CustomDeviceListAdapterActivityMain (Activity activity, String[] deviceID, String[] location, String[] plant, String[] status){
 
         this.activity = activity;
         this.deviceID = deviceID;
         this.location = location;
         this.plant = plant;
+        this.status = status;
     }
 
     @Override
@@ -53,10 +54,12 @@ public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
         TextView deviceIDTextView = (TextView) view.findViewById(R.id.deviceIDTextViewCustomDeviceListAdapterActivityMain);
         TextView plantTextView = (TextView) view.findViewById(R.id.plantTextViewCustomDeviceListAdapterActivityMain);
         TextView locationTextView = (TextView) view.findViewById(R.id.locationTextViewCustomDeviceListAdapterActivityMain);
+        TextView statusTextView = (TextView) view.findViewById(R.id.statusTextViewCustomDeviceListAdapterActivityMain);
 
         deviceIDTextView.setText(deviceID[position]);
         plantTextView.setText(plant[position]);
         locationTextView.setText(location[position]);
+        statusTextView.setText(status[position]);
 
         return view;
     }

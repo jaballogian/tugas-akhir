@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,6 @@ import me.anwarshahriar.calligrapher.Calligrapher;
 
 public class ActivityMain extends AppCompatActivity {
 
-    private TextView registerDeviceTextView, logOutTextViewActivityMain;
     private ListView devicesListView;
     private DatabaseReference devicesIDReference, allDevicesReference, allRegisteredPlantsReference;
     private FirebaseUser currentUser;
@@ -35,6 +35,7 @@ public class ActivityMain extends AppCompatActivity {
     private int i, j;
     private CustomDeviceListAdapterActivityMain customDeviceListAdapterActivityMain;
     private ArrayList<Integer> allImagePlantsArrayList, imageOwnedPlantArrayList;
+    private RelativeLayout profileRelativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +45,8 @@ public class ActivityMain extends AppCompatActivity {
         Calligrapher calligrapher = new Calligrapher(this);
         calligrapher.setFont(this, "PRODUCT_SANS.ttf", true);
 
-        registerDeviceTextView = (TextView) findViewById(R.id.registerDeviceTextViewActivityMain);
         devicesListView = (ListView) findViewById(R.id.devicesListViewActivityMain);
-        logOutTextViewActivityMain = (TextView) findViewById(R.id.logOutTextViewActivityMain);
+        profileRelativeLayout = (RelativeLayout) findViewById(R.id.profileRelativeLayoutActivityMain);
 
         checkingUser();
 
@@ -73,14 +73,6 @@ public class ActivityMain extends AppCompatActivity {
 
         readDevicesOwnedFromFirebase();
 
-        registerDeviceTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                moveToActivityRegisterDevice();
-            }
-        });
-
         devicesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -92,13 +84,12 @@ public class ActivityMain extends AppCompatActivity {
             }
         });
 
-        logOutTextViewActivityMain.setOnClickListener(new View.OnClickListener() {
+        profileRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                FirebaseAuth.getInstance().signOut();
-                Intent toActivityLogin = new Intent(ActivityMain.this, ActivityLogin.class);
-                startActivity(toActivityLogin);
+                Intent toActivityProfile = new Intent(ActivityMain.this, ActivityProfile.class);
+                startActivity(toActivityProfile);
             }
         });
     }
@@ -117,12 +108,6 @@ public class ActivityMain extends AppCompatActivity {
         toActivityLogIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(toActivityLogIn);
         finish();
-    }
-
-    private void moveToActivityRegisterDevice(){
-
-        Intent toActivityRegisterDevice = new Intent(this, ActivityRegisterDevice.class);
-        startActivity(toActivityRegisterDevice);
     }
 
     private void readDevicesOwnedFromFirebase(){

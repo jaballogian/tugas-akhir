@@ -1,51 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/white">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/plantCircleImageViewCustomDeviceListAdapterActivityMain"
-        android:src="@color/black"/>
+    android:background="@color/white"
+    android:padding="10dp">
 
     <LinearLayout
-        android:layout_gravity="center_vertical"
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:background="@drawable/rectangle_grey"
+        android:padding="10dp">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/deviceIDTextViewCustomDeviceListAdapterActivityMain"
-            android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:background="@color/green_A700">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/statusTextViewCustomDeviceListAdapterActivityMain"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
+        </TextView>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/plantTextViewCustomDeviceListAdapterActivityMain"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:id="@+id/plantCircleImageViewCustomDeviceListAdapterActivityMain"/>
 
-        <TextView
+        <LinearLayout
+            android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/locationTextViewCustomDeviceListAdapterActivityMain"
-            android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:orientation="vertical"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/deviceIDTextViewCustomDeviceListAdapterActivityMain"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/plantTextViewCustomDeviceListAdapterActivityMain"
+                android:textColor="@color/blue_A700"
+                android:textSize="16sp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/statusTextViewCustomDeviceListAdapterActivityMain"
+                android:textColor="@color/grey_700"
+                android:textSize="16sp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/locationTextViewCustomDeviceListAdapterActivityMain"
+                android:textColor="@color/grey_700"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

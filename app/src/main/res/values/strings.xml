@@ -35,6 +35,8 @@
     <string name="welcome">Welcome</string>
     <string name="forget_password">Forget password</string>
     <string name="logout">Logout</string>
+    <string name="devices">Devices</string>
+    <string name="profile">Profile</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

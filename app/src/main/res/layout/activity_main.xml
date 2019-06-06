@@ -12,8 +12,15 @@
     <TextView
         android:id="@+id/registerDeviceTextViewActivityMain"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:text="register device" />
+
+    <TextView
+        android:id="@+id/logOutTextViewActivityMain"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/logout" />
+
 
     <ListView
         android:layout_width="match_parent"

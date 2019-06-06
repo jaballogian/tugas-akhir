@@ -2,9 +2,14 @@ package com.example.tugasakhir;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +31,9 @@ public class ActivityLogin extends AppCompatActivity {
     private String email, password;
     private ProgressDialog loading;
     private FirebaseAuth mAuth;
+    private SpannableString spannableString;
+    private SpannableStringBuilder spannableStringBuilder;
+    private ForegroundColorSpan foregroundColorSpanRed, foregroundColorSpanGrey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,17 @@ public class ActivityLogin extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.passwordEditTextActivityLogin);
         registerHereTextView = (TextView) findViewById(R.id.registerHereTextViewActivityLogin);
         loginButton = (Button) findViewById(R.id.loginButtonActivityLogin);
+
+        spannableString = new SpannableString(getString(R.string.dont_have_an_account_register_here));
+        spannableStringBuilder = new SpannableStringBuilder(getString(R.string.dont_have_an_account_register_here));
+
+        foregroundColorSpanGrey = new ForegroundColorSpan(getResources().getColor(R.color.grey_700));
+        foregroundColorSpanRed = new ForegroundColorSpan(getResources().getColor(R.color.red_A700));
+
+        spannableStringBuilder.setSpan(foregroundColorSpanGrey, 0, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(foregroundColorSpanRed, 23, 36, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        registerHereTextView.setText(spannableStringBuilder);
 
         loading = new ProgressDialog(this);
 

@@ -25,7 +25,7 @@ import me.anwarshahriar.calligrapher.Calligrapher;
 
 public class ActivityMain extends AppCompatActivity {
 
-    private TextView registerDeviceTextView;
+    private TextView registerDeviceTextView, logOutTextViewActivityMain;
     private ListView devicesListView;
     private DatabaseReference devicesIDReference, allDevicesReference, allRegisteredPlantsReference;
     private FirebaseUser currentUser;
@@ -46,6 +46,9 @@ public class ActivityMain extends AppCompatActivity {
 
         registerDeviceTextView = (TextView) findViewById(R.id.registerDeviceTextViewActivityMain);
         devicesListView = (ListView) findViewById(R.id.devicesListViewActivityMain);
+        logOutTextViewActivityMain = (TextView) findViewById(R.id.logOutTextViewActivityMain);
+
+        checkingUser();
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         uID = currentUser.getUid();
@@ -65,8 +68,6 @@ public class ActivityMain extends AppCompatActivity {
         allRegisteredPlantsArrayList = new ArrayList<String>();
         allImagePlantsArrayList = new ArrayList<Integer>();
         imageOwnedPlantArrayList = new ArrayList<Integer>();
-
-        checkingUser();
 
         insertAllImagesToArray();
 
@@ -88,6 +89,16 @@ public class ActivityMain extends AppCompatActivity {
                 toActivityDeviceDetail.putExtra("serialNumber", serialNumberOwnedArrayList.get(position));
                 toActivityDeviceDetail.putExtra("image", imageOwnedPlantArrayList.get(position));
                 startActivity(toActivityDeviceDetail);
+            }
+        });
+
+        logOutTextViewActivityMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FirebaseAuth.getInstance().signOut();
+                Intent toActivityLogin = new Intent(ActivityMain.this, ActivityLogin.class);
+                startActivity(toActivityLogin);
             }
         });
     }

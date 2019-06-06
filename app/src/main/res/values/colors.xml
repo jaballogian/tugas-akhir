@@ -6,5 +6,9 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="ligthGreenA700">#76ff03</color>
+    <color name="green_A700">#00c853</color>
+    <color name="light_green_A700">#64dd17</color>
+    <color name="light_green_A400">#76ff03</color>
+    <color name="grey_700">#616161</color>
+    <color name="red_A700">#d50000</color>
 </resources>

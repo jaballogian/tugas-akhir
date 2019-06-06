@@ -33,6 +33,8 @@
     <string name="serial_number_is_invalid">Serial number is invalid</string>
     <string name="password_is_invalid">Password is invalid</string>
     <string name="welcome">Welcome</string>
+    <string name="forget_password">Forget password</string>
+    <string name="logout">Logout</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

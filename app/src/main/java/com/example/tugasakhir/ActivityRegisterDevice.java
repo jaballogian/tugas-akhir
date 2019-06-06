@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +40,10 @@ public class ActivityRegisterDevice extends AppCompatActivity {
     private int i, j;
     private boolean isDeviceRegistered;
     private FirebaseUser currentUser;
+    private SpannableString spannableString;
+    private SpannableStringBuilder spannableStringBuilder;
+    private ForegroundColorSpan foregroundColorSpanGrey, foregroundColorSpanRed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +59,17 @@ public class ActivityRegisterDevice extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.passwordEditTextActivityRegisterDevice);
         dontHaveADeviceTextView = (TextView) findViewById(R.id.dontHaveADeviceTextViewActivityRegisterDevice);
         registerButton = (Button) findViewById(R.id.registerButtonActivityRegisterDevice);
+
+        spannableString = new SpannableString(getString(R.string.dont_have_a_device_buy_here));
+        spannableStringBuilder = new SpannableStringBuilder(getString(R.string.dont_have_a_device_buy_here));
+
+        foregroundColorSpanGrey = new ForegroundColorSpan(getResources().getColor(R.color.grey_700));
+        foregroundColorSpanRed = new ForegroundColorSpan(getResources().getColor(R.color.red_A700));
+
+        spannableStringBuilder.setSpan(foregroundColorSpanGrey, 1, 20, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.setSpan(foregroundColorSpanRed, 21, 29, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        dontHaveADeviceTextView.setText(spannableStringBuilder);
 
         readDevicesFromFirebase();
 

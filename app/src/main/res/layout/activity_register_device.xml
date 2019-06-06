@@ -73,8 +73,7 @@
             android:background="@drawable/rounded_rectangle_green"
             android:textSize="20sp"
             android:text="@string/register"
-            android:id="@+id/registerButtonActivityRegisterDevice"
-            android:layout_gravity="bottom"/>
+            android:id="@+id/registerButtonActivityRegisterDevice"/>
     </LinearLayout>
 
     <TextView

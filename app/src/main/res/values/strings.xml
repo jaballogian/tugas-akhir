@@ -47,6 +47,8 @@
     <string name="status">Status</string>
     <string name="conclution_and_suggestion">Conclution and Suggestion</string>
     <string name="your_devices">Your Devices</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="register_device">Register Device</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

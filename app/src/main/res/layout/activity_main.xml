@@ -32,7 +32,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:id="@+id/profileImageButtonActivityMain"
-            android:background="@drawable/ic_account_circle_white_24dp"/>
+            android:background="@drawable/ic_account_circle_white_100dp"/>
 
     </RelativeLayout>
 

@@ -127,17 +127,83 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/registerDeviceTextViewActivityProfile"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="register device" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
 
-        <TextView
-            android:id="@+id/logOutTextViewActivityProfile"
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:id="@+id/editProfileImageButtonActivityProfile"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_account_circle_grey_50dp"
+                android:background="@drawable/rounded_rectangle_grey"/>
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:id="@+id/registerDeviceImageButtonActivityProfile"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_surround_sound_grey_50dp"
+                android:background="@drawable/rounded_rectangle_grey"/>
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:id="@+id/logOutImageButtonActivityProfile"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_exit_to_app_grey_50dp"
+                android:background="@drawable/rounded_rectangle_grey"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/logout" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/edit_profile"
+                android:textAlignment="center"
+                android:textColor="@color/grey_700"
+                android:textSize="16sp"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/register_device"
+                android:textAlignment="center"
+                android:textColor="@color/grey_700"
+                android:textSize="16sp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/logout"
+                android:textAlignment="center"
+                android:textColor="@color/grey_700"
+                android:textSize="16sp"
+                android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

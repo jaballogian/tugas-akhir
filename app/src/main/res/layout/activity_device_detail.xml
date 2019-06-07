@@ -41,10 +41,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/serialNumberTextViewActivityDeviceDetail"
                 android:textSize="24sp"
+                android:text="@string/test"
                 android:textColor="@color/black"
                 android:layout_above="@+id/plantCircleImageViewActivityDeviceDetail"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="20dp"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="100dp"
@@ -65,20 +66,22 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/plantTextViewActivityDeviceDetail"
                 android:textSize="20sp"
+                android:text="@string/test"
                 android:textColor="@color/grey_700"
                 android:layout_below="@+id/plantCircleImageViewActivityDeviceDetail"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="15dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/locationTextViewActivityDeviceDetail"
                 android:textSize="20sp"
+                android:text="@string/test"
                 android:textColor="@color/grey_700"
                 android:layout_below="@+id/plantTextViewActivityDeviceDetail"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginTop="5dp"/>
 
         </RelativeLayout>
 
@@ -121,6 +124,7 @@
                         android:layout_weight="1"
                         android:id="@+id/yourEcTextViewActivityDeviceDetail"
                         android:textSize="20sp"
+                        android:text="@string/test"
                         android:textColor="@color/white"
                         android:background="@color/black"
                         android:layout_marginLeft="5dp"
@@ -136,6 +140,7 @@
                         android:layout_weight="1"
                         android:id="@+id/yourPhTextViewActivityDeviceDetail"
                         android:textSize="20sp"
+                        android:text="@string/test"
                         android:textColor="@color/white"
                         android:background="@color/black"
                         android:layout_marginLeft="5dp"
@@ -151,6 +156,7 @@
                         android:layout_weight="1"
                         android:id="@+id/yourIntensityTextViewActivityDeviceDetail"
                         android:textSize="20sp"
+                        android:text="@string/test"
                         android:textColor="@color/white"
                         android:background="@color/black"
                         android:layout_marginLeft="5dp"
@@ -166,6 +172,7 @@
                         android:layout_weight="1"
                         android:id="@+id/yourFlowTextViewActivityDeviceDetail"
                         android:textSize="20sp"
+                        android:text="@string/test"
                         android:textColor="@color/white"
                         android:background="@color/black"
                         android:layout_marginLeft="5dp"
@@ -416,6 +423,7 @@
                     android:paddingLeft="10dp"
                     android:id="@+id/statusTextViewActivityDeviceDetail"
                     android:textSize="16sp"
+                    android:text="@string/test"
                     android:textColor="@color/black"
                     android:background="@drawable/rectangle_orange"/>
 

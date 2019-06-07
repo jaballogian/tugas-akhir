@@ -139,18 +139,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                android:id="@+id/editProfileImageButtonActivityProfile"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/ic_account_circle_grey_50dp"
-                android:background="@drawable/rounded_rectangle_grey"/>
-
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_weight="1"
                 android:id="@+id/registerDeviceImageButtonActivityProfile"
                 android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
                 android:src="@drawable/ic_surround_sound_grey_50dp"
                 android:background="@drawable/rounded_rectangle_grey"/>
 
@@ -176,22 +166,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/edit_profile"
-                android:textAlignment="center"
-                android:textColor="@color/grey_700"
-                android:textSize="16sp"
-                android:layout_marginRight="5dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/register_device"
                 android:textAlignment="center"
                 android:textColor="@color/grey_700"
                 android:textSize="16sp"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginRight="5dp"/>
 
             <TextView
                 android:layout_width="match_parent"

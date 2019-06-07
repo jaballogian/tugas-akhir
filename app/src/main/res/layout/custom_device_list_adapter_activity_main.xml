@@ -31,7 +31,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="10dp"
             android:id="@+id/plantCircleImageViewCustomDeviceListAdapterActivityMain"
-            app:civ_border_color="@color/grey_400" />
+            app:civ_border_color="@color/grey_400"
+            android:src="@color/white"/>
 
         <LinearLayout
             android:layout_gravity="center_vertical"
@@ -48,6 +49,7 @@
                 android:id="@+id/deviceIDTextViewCustomDeviceListAdapterActivityMain"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                android:text="@string/test"
                 android:layout_marginBottom="5dp"/>
 
             <TextView
@@ -56,6 +58,7 @@
                 android:id="@+id/plantTextViewCustomDeviceListAdapterActivityMain"
                 android:textColor="@color/blue_A700"
                 android:textSize="16sp"
+                android:text="@string/test"
                 android:layout_marginBottom="5dp"/>
 
             <TextView
@@ -64,6 +67,7 @@
                 android:id="@+id/statusTextViewCustomDeviceListAdapterActivityMain"
                 android:textColor="@color/grey_700"
                 android:textSize="16sp"
+                android:text="@string/test"
                 android:layout_marginBottom="5dp"/>
 
             <TextView
@@ -71,7 +75,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/locationTextViewCustomDeviceListAdapterActivityMain"
                 android:textColor="@color/grey_700"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:text="@string/test"/>
 
         </LinearLayout>
 

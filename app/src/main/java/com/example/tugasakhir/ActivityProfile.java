@@ -24,10 +24,10 @@ public class ActivityProfile extends AppCompatActivity {
 
     private TextView nameTextView, positionTextView, genderTextView, phoneTextView, birthDateTextView, emailTextView;
     private CircleImageView profileCircleImageView;
-    private DatabaseReference profileRefernce;
+    private DatabaseReference profileReference;
     private FirebaseUser currentUser;
     private String uID, name, position, gender, phone, birthdate, email, photo;
-    private ImageButton editProfileImageButton, registerDeviceImageButton, logOutImageButton;
+    private ImageButton registerDeviceImageButton, logOutImageButton, settingImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +37,9 @@ public class ActivityProfile extends AppCompatActivity {
         Calligrapher calligrapher = new Calligrapher(this);
         calligrapher.setFont(this, "PRODUCT_SANS.ttf", true);
 
-        editProfileImageButton = (ImageButton) findViewById(R.id.editProfileImageButtonActivityProfile);
         registerDeviceImageButton = (ImageButton) findViewById(R.id.registerDeviceImageButtonActivityProfile);
         logOutImageButton = (ImageButton) findViewById(R.id.logOutImageButtonActivityProfile);
+        settingImageButton = (ImageButton) findViewById(R.id.settingImageButtonActivityProfile);
         profileCircleImageView = (CircleImageView) findViewById(R.id.profileCircleImageViewActivityProfile);
         nameTextView = (TextView) findViewById(R.id.nameTextViewActivityProfile);
         positionTextView = (TextView) findViewById(R.id.positionTextViewActivityProfile);
@@ -51,7 +51,7 @@ public class ActivityProfile extends AppCompatActivity {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         uID = currentUser.getUid();
 
-        profileRefernce = FirebaseDatabase.getInstance().getReference().child("Users").child(uID).child("Profile");
+        profileReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uID).child("Profile");
 
         readProfileDataFromFirebase();
 
@@ -72,6 +72,14 @@ public class ActivityProfile extends AppCompatActivity {
                 startActivity(toActivityLogin);
             }
         });
+
+        settingImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                moveToActivityEditProfile();
+            }
+        });
     }
 
     private void moveToActivityRegisterDevice(){
@@ -80,9 +88,15 @@ public class ActivityProfile extends AppCompatActivity {
         startActivity(toActivityRegisterDevice);
     }
 
+    private void moveToActivityEditProfile(){
+
+        Intent toActivityEditProfile = new Intent(this, ActivityEditProfile.class);
+        startActivity(toActivityEditProfile);
+    }
+
     private void readProfileDataFromFirebase(){
 
-        profileRefernce.addValueEventListener(new ValueEventListener() {
+        profileReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

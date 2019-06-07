@@ -7,27 +7,35 @@
     android:padding="10dp">
 
     <LinearLayout
+        android:id="@+id/linearLayoutCustomDeviceListAdapterActivityMain"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="10dp"
         android:background="@drawable/rectangle_grey"
-        android:padding="10dp">
+        >
 
         <TextView
+            android:id="@+id/textViewCustomDeviceListAdapterActivityMain"
             android:layout_width="15dp"
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
-            android:background="@color/green_A700">
+            android:background="@color/green_A700"
+            >
 
         </TextView>
 
         <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:civ_border_width="3dp"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="10dp"
-            android:id="@+id/plantCircleImageViewCustomDeviceListAdapterActivityMain"/>
+            android:id="@+id/plantCircleImageViewCustomDeviceListAdapterActivityMain"
+            app:civ_border_color="@color/grey_400"
+            />
 
         <LinearLayout
             android:layout_gravity="center_vertical"

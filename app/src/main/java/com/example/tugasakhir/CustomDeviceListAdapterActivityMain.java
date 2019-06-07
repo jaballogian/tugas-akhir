@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -57,6 +58,9 @@ public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
         TextView plantTextView = (TextView) view.findViewById(R.id.plantTextViewCustomDeviceListAdapterActivityMain);
         TextView locationTextView = (TextView) view.findViewById(R.id.locationTextViewCustomDeviceListAdapterActivityMain);
         TextView statusTextView = (TextView) view.findViewById(R.id.statusTextViewCustomDeviceListAdapterActivityMain);
+
+        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutCustomDeviceListAdapterActivityMain);
+        TextView textView = (TextView) view.findViewById(R.id.textViewCustomDeviceListAdapterActivityMain);
 
         deviceIDTextView.setText(deviceID[position]);
         plantTextView.setText(plant[position]);

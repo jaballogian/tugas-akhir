@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,27 +17,34 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ActivityDeviceDetail extends AppCompatActivity {
 
-    private CircleImageView plantCircleImageView;
-    private TextView serialNumberTextView, plantTextView, locationTextView, statusTextView, ecTextView, phTextView, flowTextView, intensityTextView;
+//    private CircleImageView plantCircleImageView;
+    private ImageView plantCircleImageView;
+    private TextView serialNumberTextView, plantTextView, locationTextView, statusTextView, yourEcTextView, yourPhTextView, yourFlowTextView, yourIntensityTextView;
+    private TextView optimalEcTextView, optimalPhTextView, optimalIntensityTextView, optimalFlowTextView;
     private Bundle readDataFromActivityMain;
-    private String serialNumber, ec, flow, intensity, location, ph, plant, status;
+    private String serialNumber, location, plant, status;
+    private double ec, flow, intensity, ph, minec, maxec, minph, maxph;
     private int image;
-    private DatabaseReference selectedDeviceReference;
+    private DatabaseReference selectedDeviceReference, optimalParameterReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_detail);
 
-        plantCircleImageView = (CircleImageView) findViewById(R.id.plantCircleImageViewActivityDeviceDetail);
+        plantCircleImageView = (ImageView) findViewById(R.id.plantCircleImageViewActivityDeviceDetail);
         serialNumberTextView = (TextView) findViewById(R.id.serialNumberTextViewActivityDeviceDetail);
         plantTextView = (TextView) findViewById(R.id.plantTextViewActivityDeviceDetail);
         locationTextView = (TextView) findViewById(R.id.locationTextViewActivityDeviceDetail);
         statusTextView = (TextView) findViewById(R.id.statusTextViewActivityDeviceDetail);
-        ecTextView = (TextView) findViewById(R.id.ecTextViewActivityDeviceDetail);
-        phTextView = (TextView) findViewById(R.id.phTextViewActivityDeviceDetail);
-        flowTextView = (TextView) findViewById(R.id.flowTextViewActivityDeviceDetail);
-        intensityTextView = (TextView) findViewById(R.id.intensityTextViewActivityDeviceDetail);
+        yourEcTextView = (TextView) findViewById(R.id.yourEcTextViewActivityDeviceDetail);
+        yourPhTextView = (TextView) findViewById(R.id.yourPhTextViewActivityDeviceDetail);
+        yourFlowTextView = (TextView) findViewById(R.id.yourFlowTextViewActivityDeviceDetail);
+        yourIntensityTextView = (TextView) findViewById(R.id.yourIntensityTextViewActivityDeviceDetail);
+        optimalEcTextView = (TextView) findViewById(R.id.optimalEcTextViewActivityDeviceDetail);
+        optimalPhTextView = (TextView) findViewById(R.id.optimalPhTextViewActivityDeviceDetail);
+        optimalIntensityTextView = (TextView) findViewById(R.id.optimalIntensityTextViewActivityDeviceDetail);
+        optimalFlowTextView = (TextView) findViewById(R.id.optimalFlowTextViewActivityDeviceDetail);
 
         readDataFromActivityMain = getIntent().getExtras();
         serialNumber = readDataFromActivityMain.getString("serialNumber");
@@ -46,24 +54,25 @@ public class ActivityDeviceDetail extends AppCompatActivity {
 
         selectedDeviceReference = FirebaseDatabase.getInstance().getReference().child("Devices").child(serialNumber);
 
-        readParametersFromDatabase();
+        readYourParametersFromDatabase();
+
     }
 
-    private void readParametersFromDatabase(){
+    private void readYourParametersFromDatabase(){
 
         selectedDeviceReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                ec = dataSnapshot.child("ec").getValue().toString();
-                flow = dataSnapshot.child("flow").getValue().toString();
-                intensity = dataSnapshot.child("intensity").getValue().toString();
+                ec = Double.valueOf(dataSnapshot.child("ec").getValue().toString());
+                flow = Double.valueOf(dataSnapshot.child("flow").getValue().toString());
+                intensity = Double.valueOf(dataSnapshot.child("intensity").getValue().toString());
                 location = dataSnapshot.child("location").getValue().toString();
-                ph = dataSnapshot.child("ph").getValue().toString();
+                ph = Double.valueOf(dataSnapshot.child("ph").getValue().toString());
                 plant = dataSnapshot.child("plant").getValue().toString();
                 status = dataSnapshot.child("status").getValue().toString();
 
-                showData();
+                readOptimalParametersFromDatabase();
             }
 
             @Override
@@ -73,15 +82,56 @@ public class ActivityDeviceDetail extends AppCompatActivity {
         });
     }
 
-    private void showData(){
+    private void showYourData(){
 
         serialNumberTextView.setText(serialNumber);
-        ecTextView.setText(ec);
-        flowTextView.setText(flow);
-        intensityTextView.setText(intensity);
+        yourEcTextView.setText(String.valueOf(ec));
+        yourFlowTextView.setText(String.valueOf(flow));
+        yourIntensityTextView.setText(String.valueOf(intensity));
         locationTextView.setText(location);
-        phTextView.setText(ph);
+        yourPhTextView.setText(String.valueOf(ph));
         plantTextView.setText(plant);
         statusTextView.setText(status);
+
+        optimalEcTextView.setText(String.valueOf(minec) + " - " + String.valueOf(maxec));
+        optimalPhTextView.setText(String.valueOf(minph) + " - " + String.valueOf(maxph));
+
+        setBackgroundColorTextView(yourEcTextView, ec, minec, maxec);
+        setBackgroundColorTextView(yourPhTextView, ph, minph, maxph);
+    }
+
+    private void readOptimalParametersFromDatabase(){
+
+        optimalParameterReference = FirebaseDatabase.getInstance().getReference().child("Optimal Parameters").child(plant);
+
+        optimalParameterReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                minec = Double.valueOf(dataSnapshot.child("minec").getValue().toString());
+                maxec = Double.valueOf(dataSnapshot.child("maxec").getValue().toString());
+                minph = Double.valueOf(dataSnapshot.child("minph").getValue().toString());
+                maxph = Double.valueOf(dataSnapshot.child("maxph").getValue().toString());
+
+                showYourData();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void setBackgroundColorTextView(TextView inputTextView, double inputValue, double minValue, double maxValue){
+
+        if(inputValue >= minValue && inputValue <= maxValue){
+
+            inputTextView.setBackgroundColor(getResources().getColor(R.color.green_A700));
+        }
+        else {
+
+            inputTextView.setBackgroundColor(getResources().getColor(R.color.red_A700));
+        }
     }
 }

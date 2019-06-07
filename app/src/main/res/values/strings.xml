@@ -37,6 +37,15 @@
     <string name="logout">Logout</string>
     <string name="devices">Devices</string>
     <string name="profile">Profile</string>
+    <string name="your_parameters">Your Parameters</string>
+    <string name="optimal_parameters">Optimal Parameters</string>
+    <string name="test">Test</string>
+    <string name="electric_conductivity">Electric\nConductivity</string>
+    <string name="acidity_ph">Acidity\n(pH)</string>
+    <string name="light_intensity">Light\nIntensity</string>
+    <string name="water_flow">Water\nFlow</string>
+    <string name="status">Status</string>
+    <string name="conclution_and_suggestion">Conclution and Suggestion</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.anwarshahriar.calligrapher.Calligrapher;
 
 public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
 
@@ -52,6 +53,9 @@ public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
 
         layoutInflater = (LayoutInflater) activity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.custom_device_list_adapter_activity_main, null);
+
+        Calligrapher calligrapher = new Calligrapher(activity);
+        calligrapher.setFont(activity, "PRODUCT_SANS.ttf", true);
 
         CircleImageView plantCircleImageView = (CircleImageView) view.findViewById(R.id.plantCircleImageViewCustomDeviceListAdapterActivityMain);
         TextView deviceIDTextView = (TextView) view.findViewById(R.id.deviceIDTextViewCustomDeviceListAdapterActivityMain);

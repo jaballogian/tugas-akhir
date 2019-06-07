@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,10 +33,11 @@ public class ActivityMain extends AppCompatActivity {
     private String uID, allSerialNumber, serialNumberOwned, allLocation, allPlant, allStatus, allRegisteredPlants;
     private ArrayList<String> serialNumberOwnedArrayList, allSerialNumberArrayList, allLocationArrayList, allPlantArrayList, allStatusArrayList, allRegisteredPlantsArrayList;
     private ArrayList<String> locationOwnedArrayList, plantOwnedArrayList, statusOwnedArrayList;
-    private int i, j;
+    private int i, j, totalDevices;
     private CustomDeviceListAdapterActivityMain customDeviceListAdapterActivityMain;
     private ArrayList<Integer> allImagePlantsArrayList, imageOwnedPlantArrayList;
-    private RelativeLayout profileRelativeLayout;
+    private ImageButton profileImageButton;
+    private TextView yourDevicesTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,8 @@ public class ActivityMain extends AppCompatActivity {
         calligrapher.setFont(this, "PRODUCT_SANS.ttf", true);
 
         devicesListView = (ListView) findViewById(R.id.devicesListViewActivityMain);
-        profileRelativeLayout = (RelativeLayout) findViewById(R.id.profileRelativeLayoutActivityMain);
+        profileImageButton = (ImageButton) findViewById(R.id.profileImageButtonActivityMain);
+        yourDevicesTextView = (TextView) findViewById(R.id.yourDevicesTextViewActivityMain);
 
         checkingUser();
 
@@ -84,7 +87,7 @@ public class ActivityMain extends AppCompatActivity {
             }
         });
 
-        profileRelativeLayout.setOnClickListener(new View.OnClickListener() {
+        profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -112,6 +115,8 @@ public class ActivityMain extends AppCompatActivity {
 
     private void readDevicesOwnedFromFirebase(){
 
+        totalDevices = 0;
+
         devicesIDReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -120,8 +125,11 @@ public class ActivityMain extends AppCompatActivity {
 
                     serialNumberOwned = ds.getKey();
                     serialNumberOwnedArrayList.add(serialNumberOwned);
+
+                    totalDevices++;
                 }
 
+                yourDevicesTextView.setText(getString(R.string.your_devices) + " (" + totalDevices + ")");
                 readAllDevicesFromFirebase();
             }
 

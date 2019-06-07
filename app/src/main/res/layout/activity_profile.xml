@@ -1,21 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityProfile"
-    android:orientation="vertical">
+    android:background="@color/white">
 
-    <TextView
-        android:id="@+id/registerDeviceTextViewActivityProfile"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="register device" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/logOutTextViewActivityProfile"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="@string/logout" />
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/green_A700">
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_settings_white_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/settingImageButtonActivityProfile"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@color/white"
+                app:civ_border_width="3dp"
+                app:civ_border_color="@color/black"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="70dp"
+                android:id="@+id/profileCircleImageViewActivityProfile"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:text="@string/test"
+                android:id="@+id/nameTextViewActivityProfile"
+                android:layout_toRightOf="@+id/profileCircleImageViewActivityProfile"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="100dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/grey_700"
+                android:text="@string/test"
+                android:id="@+id/positionTextViewActivityProfile"
+                android:layout_toRightOf="@+id/profileCircleImageViewActivityProfile"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/nameTextViewActivityProfile"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/profileCircleImageViewActivityProfile"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:layout_marginRight="10dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        android:text="@string/test"
+                        android:id="@+id/genderTextViewActivityProfile"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        android:text="@string/test"
+                        android:id="@+id/phoneTextViewActivityProfile"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:layout_marginRight="10dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        android:text="@string/test"
+                        android:id="@+id/birthDateTextViewActivityProfile"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        android:text="@string/test"
+                        android:id="@+id/emailTextViewActivityProfile"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/registerDeviceTextViewActivityProfile"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="register device" />
+
+        <TextView
+            android:id="@+id/logOutTextViewActivityProfile"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/logout" />
+
+    </LinearLayout>
+
+</ScrollView>

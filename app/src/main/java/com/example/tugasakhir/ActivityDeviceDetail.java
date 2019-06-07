@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.anwarshahriar.calligrapher.Calligrapher;
 
 public class ActivityDeviceDetail extends AppCompatActivity {
 
@@ -31,6 +32,9 @@ public class ActivityDeviceDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_detail);
+
+        Calligrapher calligrapher = new Calligrapher(this);
+        calligrapher.setFont(this, "PRODUCT_SANS.ttf", true);
 
         plantCircleImageView = (ImageView) findViewById(R.id.plantCircleImageViewActivityDeviceDetail);
         serialNumberTextView = (TextView) findViewById(R.id.serialNumberTextViewActivityDeviceDetail);

@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.anwarshahriar.calligrapher.Calligrapher;
 
 public class ActivityEditProfile extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -54,6 +55,9 @@ public class ActivityEditProfile extends AppCompatActivity implements DatePicker
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        Calligrapher calligrapher = new Calligrapher(this);
+        calligrapher.setFont(this, "PRODUCT_SANS.ttf", true);
 
         fullnameEditText = (EditText) findViewById(R.id.fullnameEditTextActivityEditProfile);
         phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditTextActivityEditProfile);

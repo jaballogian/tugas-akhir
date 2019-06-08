@@ -51,6 +51,9 @@
     <string name="register_device">Register Device</string>
     <string name="save">Save</string>
     <string name="saved">Saved</string>
+    <string name="select_plant">Select Plant</string>
+    <string name="please_select_a_valid_plant">Please select a valid plant</string>
+    <string name="location">Location</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

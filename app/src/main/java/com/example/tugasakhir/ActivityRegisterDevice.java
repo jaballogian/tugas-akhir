@@ -1,5 +1,6 @@
 package com.example.tugasakhir;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +10,11 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,19 +35,20 @@ import me.anwarshahriar.calligrapher.Calligrapher;
 
 public class ActivityRegisterDevice extends AppCompatActivity {
 
-    private EditText serialNumberEditText, passwordEditText;
+    private EditText serialNumberEditText, passwordEditText, locationEditText;
     private TextView dontHaveADeviceTextView;
     private Button registerButton;
-    private String serialNumberFromUser, passwordFromUser, serialNumberFromFirebase, passwordFromFirebase, uID;
-    private DatabaseReference devicesReference, databaseReference;
-    private ArrayList<String> serialNumberArrayList, passwordArrayList;
+    private String serialNumberFromUser, passwordFromUser, locationFromUser, serialNumberFromFirebase, passwordFromFirebase, uID, selectedPlant, plantFromFirebase;
+    private DatabaseReference devicesReference, databaseReference, plantReference;
+    private ArrayList<String> serialNumberArrayList, passwordArrayList, plantArrayList;
+    private ArrayAdapter<String> plantAdapter;
     private int i, j;
     private boolean isDeviceRegistered;
     private FirebaseUser currentUser;
     private SpannableString spannableString;
     private SpannableStringBuilder spannableStringBuilder;
     private ForegroundColorSpan foregroundColorSpanGrey, foregroundColorSpanRed;
-
+    private Spinner selectPlantSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +59,14 @@ public class ActivityRegisterDevice extends AppCompatActivity {
         calligrapher.setFont(this, "PRODUCT_SANS.ttf", true);
 
         devicesReference = FirebaseDatabase.getInstance().getReference().child("Devices");
+        plantReference = FirebaseDatabase.getInstance().getReference().child("Optimal Parameters");
 
         serialNumberEditText = (EditText) findViewById(R.id.serialNumberEditTextActivityRegisterDevice);
         passwordEditText = (EditText) findViewById(R.id.passwordEditTextActivityRegisterDevice);
         dontHaveADeviceTextView = (TextView) findViewById(R.id.dontHaveADeviceTextViewActivityRegisterDevice);
         registerButton = (Button) findViewById(R.id.registerButtonActivityRegisterDevice);
+        selectPlantSpinner = (Spinner) findViewById(R.id.selectPlantSpinnerActivityRegister);
+        locationEditText = (EditText) findViewById(R.id.locationEditTextActivityRegisterDevice);
 
         spannableString = new SpannableString(getString(R.string.dont_have_a_device_buy_here));
         spannableStringBuilder = new SpannableStringBuilder(getString(R.string.dont_have_a_device_buy_here));
@@ -71,6 +79,7 @@ public class ActivityRegisterDevice extends AppCompatActivity {
 
         dontHaveADeviceTextView.setText(spannableStringBuilder);
 
+        readAllPlantsFromFirebase();
         readDevicesFromFirebase();
 
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -83,15 +92,63 @@ public class ActivityRegisterDevice extends AppCompatActivity {
         });
     }
 
+    private void readAllPlantsFromFirebase(){
+
+        plantReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                plantArrayList = new ArrayList<String>();
+                plantArrayList.add(getString(R.string.select_plant));
+
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+
+                    plantFromFirebase = ds.getKey();
+
+                    plantArrayList.add(plantFromFirebase);
+                }
+
+                populatePlantsToSpinner();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void populatePlantsToSpinner(){
+
+        plantAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, plantArrayList);
+        plantAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectPlantSpinner.setAdapter(plantAdapter);
+
+        selectPlantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                selectedPlant = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+                // TODO Auto-generated method stub
+            }
+        });
+    }
+
     private void getStringFromEditText(){
 
         serialNumberFromUser = serialNumberEditText.getText().toString();
         passwordFromUser = passwordEditText.getText().toString();
+        locationFromUser = locationEditText.getText().toString();
     }
 
     private void checkAllFields(){
 
-        if(serialNumberFromUser.isEmpty() || passwordFromUser.isEmpty()){
+        if(serialNumberFromUser.isEmpty() || passwordFromUser.isEmpty() || selectedPlant.isEmpty() || locationFromUser.isEmpty()){
 
             Toast.makeText(ActivityRegisterDevice.this, getString(R.string.please_fill_all_the_fields), Toast.LENGTH_LONG).show();
         }
@@ -146,13 +203,20 @@ public class ActivityRegisterDevice extends AppCompatActivity {
         }
         else {
 
-            if(!passwordFromUser.equals(passwordArrayList.get(j))){
+            if(selectedPlant.equals(plantArrayList.get(0))){
 
-                Toast.makeText(ActivityRegisterDevice.this, getString(R.string.password_is_invalid), Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityRegisterDevice.this, getString(R.string.please_select_a_valid_plant), Toast.LENGTH_LONG).show();
             }
             else {
 
-                saveDeviceToDatabase();
+                if(!passwordFromUser.equals(passwordArrayList.get(j))){
+
+                    Toast.makeText(ActivityRegisterDevice.this, getString(R.string.password_is_invalid), Toast.LENGTH_LONG).show();
+                }
+                else {
+
+                    saveDeviceToDatabase();
+                }
             }
         }
     }
@@ -171,6 +235,9 @@ public class ActivityRegisterDevice extends AppCompatActivity {
         uID = currentUser.getUid();
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uID).child("Devices").child(serialNumberFromUser);
+
+        devicesReference.child(serialNumberFromUser).child("plant").setValue(selectedPlant);
+        devicesReference.child(serialNumberFromUser).child("location").setValue(locationFromUser);
 
         databaseReference.setValue("true").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

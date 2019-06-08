@@ -1,5 +1,6 @@
 package com.example.tugasakhir;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +38,7 @@ public class ActivityMain extends AppCompatActivity {
     private ArrayList<Integer> allImagePlantsArrayList, imageOwnedPlantArrayList;
     private ImageButton profileImageButton;
     private TextView yourDevicesTextView;
+    private ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class ActivityMain extends AppCompatActivity {
         devicesListView = (ListView) findViewById(R.id.devicesListViewActivityMain);
         profileImageButton = (ImageButton) findViewById(R.id.profileImageButtonActivityMain);
         yourDevicesTextView = (TextView) findViewById(R.id.yourDevicesTextViewActivityMain);
+
+        loading = new ProgressDialog(this);
 
         checkingUser();
 
@@ -114,6 +117,8 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     private void readDevicesOwnedFromFirebase(){
+
+        setProgressDialog();
 
         totalDevices = 0;
 
@@ -196,6 +201,8 @@ public class ActivityMain extends AppCompatActivity {
                 statusOwnedArrayList.toArray(new String[statusOwnedArrayList.size()]),
                 imageOwnedPlantArrayList.toArray(new Integer[imageOwnedPlantArrayList.size()]));
         devicesListView.setAdapter(customDeviceListAdapterActivityMain);
+
+        loading.dismiss();
     }
 
     private void compareOwnedAndAllRegisteredPlants(){
@@ -238,7 +245,6 @@ public class ActivityMain extends AppCompatActivity {
 
     private void insertAllImagesToArray(){
 
-        allImagePlantsArrayList.add(R.drawable.plant_artichoke);
         allImagePlantsArrayList.add(R.drawable.plant_asparagus);
         allImagePlantsArrayList.add(R.drawable.plant_beans);
         allImagePlantsArrayList.add(R.drawable.plant_beetroot);
@@ -255,6 +261,7 @@ public class ActivityMain extends AppCompatActivity {
         allImagePlantsArrayList.add(R.drawable.plant_garlic);
         allImagePlantsArrayList.add(R.drawable.plant_gia_lan);
         allImagePlantsArrayList.add(R.drawable.plant_ginger);
+        allImagePlantsArrayList.add(R.drawable.plant_jerusalem_artichoke);
         allImagePlantsArrayList.add(R.drawable.plant_kale);
         allImagePlantsArrayList.add(R.drawable.plant_leek);
         allImagePlantsArrayList.add(R.drawable.plant_lettuce);
@@ -275,5 +282,13 @@ public class ActivityMain extends AppCompatActivity {
         allImagePlantsArrayList.add(R.drawable.plant_turnip);
         allImagePlantsArrayList.add(R.drawable.plant_wombok);
         allImagePlantsArrayList.add(R.drawable.plant_zucchini);
+    }
+
+    private void setProgressDialog(){
+
+        loading.setTitle(R.string.processing);
+        loading.setMessage(getString(R.string.please_wait));
+        loading.setCanceledOnTouchOutside(false);
+        loading.show();
     }
 }

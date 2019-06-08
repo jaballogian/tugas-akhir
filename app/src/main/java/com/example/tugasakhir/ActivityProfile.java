@@ -27,7 +27,7 @@ public class ActivityProfile extends AppCompatActivity {
     private DatabaseReference profileReference;
     private FirebaseUser currentUser;
     private String uID, name, position, gender, phone, birthdate, email, photo;
-    private ImageButton registerDeviceImageButton, logOutImageButton, settingImageButton;
+    private ImageButton registerDeviceImageButton, logOutImageButton, settingImageButton, homeImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class ActivityProfile extends AppCompatActivity {
         phoneTextView = (TextView) findViewById(R.id.phoneTextViewActivityProfile);
         birthDateTextView = (TextView) findViewById(R.id.birthDateTextViewActivityProfile);
         emailTextView = (TextView) findViewById(R.id.emailTextViewActivityProfile);
+        homeImageButton = (ImageButton) findViewById(R.id.homeImageButtonActivityProfile);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         uID = currentUser.getUid();
@@ -69,7 +70,9 @@ public class ActivityProfile extends AppCompatActivity {
 
                 FirebaseAuth.getInstance().signOut();
                 Intent toActivityLogin = new Intent(ActivityProfile.this, ActivityLogin.class);
+                toActivityLogin.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(toActivityLogin);
+                finish();
             }
         });
 
@@ -80,6 +83,20 @@ public class ActivityProfile extends AppCompatActivity {
                 moveToActivityEditProfile();
             }
         });
+
+        homeImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                moveToActivityMain();
+            }
+        });
+    }
+
+    private void moveToActivityMain(){
+
+        Intent toActivityMain = new Intent(ActivityProfile.this, ActivityMain.class);
+        startActivity(toActivityMain);
     }
 
     private void moveToActivityRegisterDevice(){

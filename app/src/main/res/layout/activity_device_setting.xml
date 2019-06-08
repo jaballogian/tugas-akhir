@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityDeviceSetting"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/green_A700"
+        android:layout_alignParentTop="true"
+        android:id="@+id/relativeLayoutActivityDeviceSetting">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/serialNumberTextViewActivityDeviceDetail"
+            android:textSize="24sp"
+            android:text="@string/test"
+            android:textColor="@color/black"
+            android:layout_above="@+id/plantImageViewActivityDeviceSetting"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="3dp"
+            android:src="@color/white"/>
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/plantImageViewActivityDeviceSetting"
+            android:layout_marginBottom="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="@drawable/rounded_rectangle_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="30dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="30dp"
+        android:layout_below="@+id/relativeLayoutActivityDeviceSetting"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/selectPlantSpinnerActivityDeviceDetail"
+            android:layout_marginBottom="10dp">
+        </Spinner>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/locationEditTextActivityDeviceSetting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/location"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="18sp"
+                android:textColorHint="@color/black"
+                android:textColor="@color/green_A700"
+                android:layout_marginBottom="20dp"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@drawable/rounded_rectangle_green"
+            android:textSize="20sp"
+            android:text="@string/save"
+            android:id="@+id/saveButtonActivityDeviceSetting"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/showPasswordTextViewActivityDeviceSetting"
+        android:textSize="16sp"
+        android:text="@string/show_password_for_this_device"
+        android:textColor="@color/grey_700"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

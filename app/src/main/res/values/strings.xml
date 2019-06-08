@@ -54,6 +54,9 @@
     <string name="select_plant">Select Plant</string>
     <string name="please_select_a_valid_plant">Please select a valid plant</string>
     <string name="location">Location</string>
+    <string name="show_password_for_this_device">Show password for this device</string>
+    <string name="password_for">Password for</string>
+    <string name="is">is :</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

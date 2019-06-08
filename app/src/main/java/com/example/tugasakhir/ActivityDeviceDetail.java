@@ -1,9 +1,12 @@
 package com.example.tugasakhir;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,10 +26,11 @@ public class ActivityDeviceDetail extends AppCompatActivity {
     private TextView serialNumberTextView, plantTextView, locationTextView, statusTextView, yourEcTextView, yourPhTextView, yourFlowTextView, yourIntensityTextView;
     private TextView optimalEcTextView, optimalPhTextView, optimalIntensityTextView, optimalFlowTextView;
     private Bundle readDataFromActivityMain;
-    private String serialNumber, location, plant, status;
+    private String serialNumber, location, plant, status, password;
     private double ec, flow, intensity, ph, minec, maxec, minph, maxph;
     private int image;
     private DatabaseReference selectedDeviceReference, optimalParameterReference;
+    private ImageButton settingImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
         optimalPhTextView = (TextView) findViewById(R.id.optimalPhTextViewActivityDeviceDetail);
         optimalIntensityTextView = (TextView) findViewById(R.id.optimalIntensityTextViewActivityDeviceDetail);
         optimalFlowTextView = (TextView) findViewById(R.id.optimalFlowTextViewActivityDeviceDetail);
+        settingImageButton = (ImageButton) findViewById(R.id.settingImageButtonActivityDeviceDetail);
 
         readDataFromActivityMain = getIntent().getExtras();
         serialNumber = readDataFromActivityMain.getString("serialNumber");
@@ -60,6 +65,24 @@ public class ActivityDeviceDetail extends AppCompatActivity {
 
         readYourParametersFromDatabase();
 
+        settingImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                moveToActivityDeviceSetting();
+            }
+        });
+    }
+
+    private void moveToActivityDeviceSetting(){
+
+        Intent toActivityDeviceSetting = new Intent(ActivityDeviceDetail.this, ActivityDeviceSetting.class);
+        toActivityDeviceSetting.putExtra("serialNumber", serialNumber);
+        toActivityDeviceSetting.putExtra("image", image);
+        toActivityDeviceSetting.putExtra("plant", plant);
+        toActivityDeviceSetting.putExtra("location", location);
+        toActivityDeviceSetting.putExtra("password", password);
+        startActivity(toActivityDeviceSetting);
     }
 
     private void readYourParametersFromDatabase(){
@@ -75,6 +98,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
                 ph = Double.valueOf(dataSnapshot.child("ph").getValue().toString());
                 plant = dataSnapshot.child("plant").getValue().toString();
                 status = dataSnapshot.child("status").getValue().toString();
+                password = dataSnapshot.child("password").getValue().toString();
 
                 readOptimalParametersFromDatabase();
             }

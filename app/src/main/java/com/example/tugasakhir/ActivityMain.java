@@ -33,7 +33,7 @@ public class ActivityMain extends AppCompatActivity {
     private String uID, allSerialNumber, serialNumberOwned, allLocation, allPlant, allStatus, allRegisteredPlants;
     private ArrayList<String> serialNumberOwnedArrayList, allSerialNumberArrayList, allLocationArrayList, allPlantArrayList, allStatusArrayList, allRegisteredPlantsArrayList;
     private ArrayList<String> locationOwnedArrayList, plantOwnedArrayList, statusOwnedArrayList;
-    private int i, j, totalDevices;
+    private int totalDevices;
     private CustomDeviceListAdapterActivityMain customDeviceListAdapterActivityMain;
     private ArrayList<Integer> allImagePlantsArrayList, imageOwnedPlantArrayList;
     private ImageButton profileImageButton;
@@ -74,8 +74,6 @@ public class ActivityMain extends AppCompatActivity {
         allRegisteredPlantsArrayList = new ArrayList<String>();
         allImagePlantsArrayList = new ArrayList<Integer>();
         imageOwnedPlantArrayList = new ArrayList<Integer>();
-
-        insertAllImagesToArray();
 
         readDevicesOwnedFromFirebase();
 
@@ -176,9 +174,9 @@ public class ActivityMain extends AppCompatActivity {
 
     private void readParametersFromDevices(){
 
-        for(i = 0; i < serialNumberOwnedArrayList.size(); i++){
+        for(int i = 0; i < serialNumberOwnedArrayList.size(); i++){
 
-            for(j = 0; j < allSerialNumberArrayList.size(); j++){
+            for(int j = 0; j < allSerialNumberArrayList.size(); j++){
 
                 if(serialNumberOwnedArrayList.get(i).equals(allSerialNumberArrayList.get(j))){
 
@@ -207,9 +205,11 @@ public class ActivityMain extends AppCompatActivity {
 
     private void compareOwnedAndAllRegisteredPlants(){
 
-        for(i = 0; i < plantOwnedArrayList.size(); i++){
+        insertAllImagesToArray();
 
-            for (j = 0; j < allRegisteredPlantsArrayList.size(); j++){
+        for(int i = 0; i < plantOwnedArrayList.size(); i++){
+
+            for (int j = 0; j < allRegisteredPlantsArrayList.size(); j++){
 
                 if(plantOwnedArrayList.get(i).equals(allRegisteredPlantsArrayList.get(j))){
 

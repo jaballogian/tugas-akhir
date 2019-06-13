@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:background="@drawable/rectangle_grey"
-        >
+        android:background="@drawable/rectangle_grey">
 
         <TextView
             android:id="@+id/textViewCustomDeviceListAdapterActivityMain"
@@ -43,14 +42,37 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/deviceIDTextViewCustomDeviceListAdapterActivityMain"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/test"
-                android:layout_marginBottom="5dp"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/deviceIDTextViewCustomDeviceListAdapterActivityMain"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:text="@string/test"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_timelapse_grey_24dp"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/timeImageViewCustomDeviceListAdapterActivityMain"/>
+                <TextView
+                    android:layout_weight="4.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/timeTextViewCustomDeviceListAdapterActivityMain"
+                    android:textColor="@color/grey_700"
+                    android:textSize="20sp"
+                    android:text="1"
+                    android:textAlignment="center"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

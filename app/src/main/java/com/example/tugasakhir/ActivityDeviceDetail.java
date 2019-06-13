@@ -27,7 +27,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
     private TextView optimalEcTextView, optimalPhTextView, optimalIntensityTextView, optimalFlowTextView;
     private Bundle readDataFromActivityMain;
     private String serialNumber, location, plant, status, password;
-    private double ec, flow, intensity, ph, minec, maxec, minph, maxph;
+    private double ec, flow, intensity, ph, minec, maxec, minph, maxph, minflow, maxflow, minint, maxint;
     private int image;
     private DatabaseReference selectedDeviceReference, optimalParameterReference;
     private ImageButton settingImageButton;
@@ -123,9 +123,13 @@ public class ActivityDeviceDetail extends AppCompatActivity {
 
         optimalEcTextView.setText(String.valueOf(minec) + " - " + String.valueOf(maxec));
         optimalPhTextView.setText(String.valueOf(minph) + " - " + String.valueOf(maxph));
+        optimalIntensityTextView.setText(String.valueOf(minint) + " - " + String.valueOf(maxint));
+        optimalFlowTextView.setText(String.valueOf(minflow) + " - " + String.valueOf(maxflow));
 
         setBackgroundColorTextView(yourEcTextView, ec, minec, maxec);
         setBackgroundColorTextView(yourPhTextView, ph, minph, maxph);
+        setBackgroundColorTextView(yourFlowTextView, flow, minflow, maxflow);
+        setBackgroundColorTextView(yourIntensityTextView, intensity, minint, maxint);
     }
 
     private void readOptimalParametersFromDatabase(){
@@ -140,6 +144,10 @@ public class ActivityDeviceDetail extends AppCompatActivity {
                 maxec = Double.valueOf(dataSnapshot.child("maxec").getValue().toString());
                 minph = Double.valueOf(dataSnapshot.child("minph").getValue().toString());
                 maxph = Double.valueOf(dataSnapshot.child("maxph").getValue().toString());
+                minflow = Double.valueOf(dataSnapshot.child("minflow").getValue().toString());
+                maxflow = Double.valueOf(dataSnapshot.child("maxflow").getValue().toString());
+                minint = Double.valueOf(dataSnapshot.child("minint").getValue().toString());
+                maxint = Double.valueOf(dataSnapshot.child("maxint").getValue().toString());
 
                 showYourData();
             }

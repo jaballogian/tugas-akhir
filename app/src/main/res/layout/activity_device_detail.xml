@@ -286,7 +286,8 @@
                         android:layout_marginBottom="10dp"
                         android:layout_marginRight="5dp"
                         android:textAlignment="center"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -302,7 +303,8 @@
                         android:layout_marginBottom="10dp"
                         android:layout_marginRight="5dp"
                         android:textAlignment="center"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -318,7 +320,8 @@
                         android:layout_marginBottom="10dp"
                         android:layout_marginRight="5dp"
                         android:textAlignment="center"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -334,7 +337,8 @@
                         android:layout_marginBottom="10dp"
                         android:layout_marginRight="5dp"
                         android:textAlignment="center"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"/>
 
                 </LinearLayout>
 
@@ -444,7 +448,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textColor="@color/red_A700"
-                android:text="@string/conclution_and_suggestion"/>
+                android:text="@string/conclusion_and_suggestion"/>
 
             <TextView
                 android:layout_width="match_parent"

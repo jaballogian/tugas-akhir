@@ -21,7 +21,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import me.anwarshahriar.calligrapher.Calligrapher;
 
@@ -30,9 +35,9 @@ public class ActivityMain extends AppCompatActivity {
     private ListView devicesListView;
     private DatabaseReference devicesIDReference, allDevicesReference, allRegisteredPlantsReference;
     private FirebaseUser currentUser;
-    private String uID, allSerialNumber, serialNumberOwned, allLocation, allPlant, allStatus, allRegisteredPlants;
-    private ArrayList<String> serialNumberOwnedArrayList, allSerialNumberArrayList, allLocationArrayList, allPlantArrayList, allStatusArrayList, allRegisteredPlantsArrayList;
-    private ArrayList<String> locationOwnedArrayList, plantOwnedArrayList, statusOwnedArrayList;
+    private String uID, allSerialNumber, serialNumberOwned, allLocation, allPlant, allStatus, allRegisteredPlants, allDates;
+    private ArrayList<String> serialNumberOwnedArrayList, allSerialNumberArrayList, allLocationArrayList, allPlantArrayList, allStatusArrayList, allRegisteredPlantsArrayList, allDatesArrayList;
+    private ArrayList<String> locationOwnedArrayList, plantOwnedArrayList, statusOwnedArrayList, datesOwnedArrayList;
     private int totalDevices;
     private CustomDeviceListAdapterActivityMain customDeviceListAdapterActivityMain;
     private ArrayList<Integer> allImagePlantsArrayList, imageOwnedPlantArrayList;
@@ -74,6 +79,8 @@ public class ActivityMain extends AppCompatActivity {
         allRegisteredPlantsArrayList = new ArrayList<String>();
         allImagePlantsArrayList = new ArrayList<Integer>();
         imageOwnedPlantArrayList = new ArrayList<Integer>();
+        datesOwnedArrayList = new ArrayList<String>();
+        allDatesArrayList = new ArrayList<String>();
 
         readDevicesOwnedFromFirebase();
 
@@ -155,11 +162,13 @@ public class ActivityMain extends AppCompatActivity {
                     allLocation = ds.child("location").getValue().toString();
                     allPlant = ds.child("plant").getValue().toString();
                     allStatus = ds.child("status").getValue().toString();
+                    allDates = ds.child("date").getValue().toString();
 
                     allSerialNumberArrayList.add(allSerialNumber);
                     allLocationArrayList.add(allLocation);
                     allPlantArrayList.add(allPlant);
                     allStatusArrayList.add(allStatus);
+                    allDatesArrayList.add(allDates);
                 }
 
                 readAllRegisteredPlantsFromFirebase();
@@ -183,6 +192,7 @@ public class ActivityMain extends AppCompatActivity {
                     locationOwnedArrayList.add(allLocationArrayList.get(j));
                     plantOwnedArrayList.add(allPlantArrayList.get(j));
                     statusOwnedArrayList.add(allStatusArrayList.get(j));
+                    datesOwnedArrayList.add(allDatesArrayList.get(j));
                 }
             }
         }
@@ -197,7 +207,8 @@ public class ActivityMain extends AppCompatActivity {
                 locationOwnedArrayList.toArray(new String[locationOwnedArrayList.size()]),
                 plantOwnedArrayList.toArray(new String[plantOwnedArrayList.size()]),
                 statusOwnedArrayList.toArray(new String[statusOwnedArrayList.size()]),
-                imageOwnedPlantArrayList.toArray(new Integer[imageOwnedPlantArrayList.size()]));
+                imageOwnedPlantArrayList.toArray(new Integer[imageOwnedPlantArrayList.size()]),
+                datesOwnedArrayList.toArray(new String[datesOwnedArrayList.size()]));
         devicesListView.setAdapter(customDeviceListAdapterActivityMain);
 
         loading.dismiss();

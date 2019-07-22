@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/icon_application_leaf"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ActivityDeviceSetting"></activity>
+        <activity android:name=".ActivityHistory"></activity>
+        <activity android:name=".ActivityDeviceSetting" />
         <activity android:name=".ActivityEditProfile" />
         <activity android:name=".ActivityProfile" />
         <activity android:name=".ActivityDeviceDetail" />

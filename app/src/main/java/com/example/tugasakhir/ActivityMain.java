@@ -139,7 +139,7 @@ public class ActivityMain extends AppCompatActivity {
                     totalDevices++;
                 }
 
-                yourDevicesTextView.setText(getString(R.string.your_devices) + " (" + totalDevices + ")");
+                yourDevicesTextView.setText(getString(R.string.your_devices) + " ( " + totalDevices + " )");
                 readAllDevicesFromFirebase();
             }
 

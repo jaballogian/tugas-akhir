@@ -37,7 +37,7 @@
     <string name="logout">Logout</string>
     <string name="devices">Devices</string>
     <string name="profile">Profile</string>
-    <string name="your_parameters">Your Parameters</string>
+    <string name="actual_parameters">Actual Parameters</string>
     <string name="optimal_parameters">Optimal Parameters</string>
     <string name="test">Test</string>
     <string name="electric_conductivity">Electric\nConductivity</string>
@@ -57,6 +57,11 @@
     <string name="show_password_for_this_device">Show password for this device</string>
     <string name="password_for">Password for</string>
     <string name="is">is :</string>
+    <string name="history_of">History of</string>
+    <string name="ec">EC</string>
+    <string name="ph">pH</string>
+    <string name="light">Light</string>
+    <string name="flow">Flow</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

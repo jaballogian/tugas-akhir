@@ -30,7 +30,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
     private double ec, flow, intensity, ph, minec, maxec, minph, maxph, minflow, maxflow, minint, maxint;
     private int image;
     private DatabaseReference selectedDeviceReference, optimalParameterReference;
-    private ImageButton settingImageButton;
+    private ImageButton settingImageButton, historyImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
         optimalIntensityTextView = (TextView) findViewById(R.id.optimalIntensityTextViewActivityDeviceDetail);
         optimalFlowTextView = (TextView) findViewById(R.id.optimalFlowTextViewActivityDeviceDetail);
         settingImageButton = (ImageButton) findViewById(R.id.settingImageButtonActivityDeviceDetail);
+        historyImageButton = (ImageButton) findViewById(R.id.historyImageButtonActivityDeviceDetail);
 
         readDataFromActivityMain = getIntent().getExtras();
         serialNumber = readDataFromActivityMain.getString("serialNumber");
@@ -70,6 +71,14 @@ public class ActivityDeviceDetail extends AppCompatActivity {
             public void onClick(View v) {
 
                 moveToActivityDeviceSetting();
+            }
+        });
+
+        historyImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                moveToActivityHistory();
             }
         });
     }
@@ -169,5 +178,12 @@ public class ActivityDeviceDetail extends AppCompatActivity {
 
             inputTextView.setBackgroundColor(getResources().getColor(R.color.red_A700));
         }
+    }
+
+    private void moveToActivityHistory(){
+
+        Intent toActivityHistory = new Intent(this, ActivityHistory.class);
+        toActivityHistory.putExtra("serialNumber", serialNumber);
+        startActivity(toActivityHistory);
     }
 }

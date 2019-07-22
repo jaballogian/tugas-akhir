@@ -66,6 +66,7 @@ public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
         calligrapher.setFont(activity, "PRODUCT_SANS.ttf", true);
 
         CircleImageView plantCircleImageView = (CircleImageView) view.findViewById(R.id.plantCircleImageViewCustomDeviceListAdapterActivityMain);
+//        ImageView plantCircleImageView = (ImageView) view.findViewById(R.id.plantCircleImageViewCustomDeviceListAdapterActivityMain);
         TextView deviceIDTextView = (TextView) view.findViewById(R.id.deviceIDTextViewCustomDeviceListAdapterActivityMain);
         TextView plantTextView = (TextView) view.findViewById(R.id.plantTextViewCustomDeviceListAdapterActivityMain);
         TextView locationTextView = (TextView) view.findViewById(R.id.locationTextViewCustomDeviceListAdapterActivityMain);

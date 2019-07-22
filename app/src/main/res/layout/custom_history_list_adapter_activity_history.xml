@@ -20,18 +20,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:civ_border_width="3dp"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/plantCircleImageViewCustomHistoryListAdapterActivityHistory"
-                app:civ_border_color="@color/green_A700"
-                android:src="@color/white"
-                android:layout_marginRight="15dp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="5dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    app:civ_border_width="3dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_vertical"
+                    app:civ_border_color="@color/grey_700"
+                    android:src="@color/white"/>
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/plantCircleImageViewCustomHistoryListAdapterActivityHistory"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

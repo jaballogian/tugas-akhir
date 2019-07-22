@@ -24,10 +24,11 @@ public class ActivityHistory extends AppCompatActivity {
     private ListView historyListView;
     private TextView historyTextView;
     private Bundle readDataFromActivityDeviceDetail;
-    private String serialNumber, timeFromFirebase, ec, flow, intensity, location, ph, plant;
-    private DatabaseReference historyReference;
+    private String serialNumber, timeFromFirebase, ec, flow, intensity, location, ph, plant, allRegisteredPlants;
+    private DatabaseReference historyReference, allRegisteredPlantsReference;
     private int totalUsed;
-    private ArrayList<String> timeFromFirebaseArrayList, ecArraylist, flowArrayList, intensityArrayList, locationArrayList, phArrayList, plantArrayList;
+    private ArrayList<Integer> allImagePlantsArrayList, imageOwnedPlantArrayList;
+    private ArrayList<String> timeFromFirebaseArrayList, ecArraylist, flowArrayList, intensityArrayList, locationArrayList, phArrayList, plantArrayList, allRegisteredPlantsArrayList;
     private CustomHistoryListAdapterActivityHistory customHistoryListAdapterActivityHistory;
     private ProgressDialog loading;
 
@@ -48,6 +49,7 @@ public class ActivityHistory extends AppCompatActivity {
         serialNumber = readDataFromActivityDeviceDetail.getString("serialNumber");
 
         historyReference = FirebaseDatabase.getInstance().getReference().child("Devices").child(serialNumber).child("history");
+        allRegisteredPlantsReference = FirebaseDatabase.getInstance().getReference().child("Optimal Parameters");
 
         timeFromFirebaseArrayList = new ArrayList<String>();
         ecArraylist = new ArrayList<String>();
@@ -56,6 +58,9 @@ public class ActivityHistory extends AppCompatActivity {
         locationArrayList = new ArrayList<String>();
         phArrayList = new ArrayList<String>();
         plantArrayList = new ArrayList<String>();
+        allImagePlantsArrayList = new ArrayList<Integer>();
+        imageOwnedPlantArrayList = new ArrayList<Integer>();
+        allRegisteredPlantsArrayList = new ArrayList<String>();
 
         readDevicesHistotyFromFirebase();
     }
@@ -94,7 +99,7 @@ public class ActivityHistory extends AppCompatActivity {
 
                 historyTextView.setText(getString(R.string.history_of) + " " + serialNumber + " ( " + totalUsed+ " )");
 
-                populateHistoryListView();
+                readAllRegisteredPlantsFromFirebase();
             }
 
             @Override
@@ -102,6 +107,46 @@ public class ActivityHistory extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void readAllRegisteredPlantsFromFirebase(){
+
+        allRegisteredPlantsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+
+                    allRegisteredPlants = ds.getKey();
+                    allRegisteredPlantsArrayList.add(allRegisteredPlants);
+                }
+
+                compareOwnedAndAllRegisteredPlants();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void compareOwnedAndAllRegisteredPlants(){
+
+        insertAllImagesToArray();
+
+        for(int i = 0; i < plantArrayList.size(); i++){
+
+            for (int j = 0; j < allRegisteredPlantsArrayList.size(); j++){
+
+                if(plantArrayList.get(i).equals(allRegisteredPlantsArrayList.get(j))){
+
+                    imageOwnedPlantArrayList.add(allImagePlantsArrayList.get(j));
+                }
+            }
+        }
+
+        populateHistoryListView();
     }
 
     private void populateHistoryListView(){
@@ -113,7 +158,8 @@ public class ActivityHistory extends AppCompatActivity {
                 ecArraylist.toArray(new String[ecArraylist.size()]),
                 phArrayList.toArray(new String[phArrayList.size()]),
                 intensityArrayList.toArray(new String[intensityArrayList.size()]),
-                flowArrayList.toArray(new String[flowArrayList.size()]));
+                flowArrayList.toArray(new String[flowArrayList.size()]),
+                imageOwnedPlantArrayList.toArray(new Integer[imageOwnedPlantArrayList.size()]));
         historyListView.setAdapter(customHistoryListAdapterActivityHistory);
 
         loading.dismiss();
@@ -125,5 +171,46 @@ public class ActivityHistory extends AppCompatActivity {
         loading.setMessage(getString(R.string.please_wait));
         loading.setCanceledOnTouchOutside(false);
         loading.show();
+    }
+
+    private void insertAllImagesToArray(){
+
+        allImagePlantsArrayList.add(R.drawable.plant_asparagus);
+        allImagePlantsArrayList.add(R.drawable.plant_beans);
+        allImagePlantsArrayList.add(R.drawable.plant_beetroot);
+        allImagePlantsArrayList.add(R.drawable.plant_broccoli);
+        allImagePlantsArrayList.add(R.drawable.plant_cabbage);
+        allImagePlantsArrayList.add(R.drawable.plant_capsicum);
+        allImagePlantsArrayList.add(R.drawable.plant_carrot);
+        allImagePlantsArrayList.add(R.drawable.plant_cauliflower);
+        allImagePlantsArrayList.add(R.drawable.plant_celeriac);
+        allImagePlantsArrayList.add(R.drawable.plant_celery);
+        allImagePlantsArrayList.add(R.drawable.plant_chili);
+        allImagePlantsArrayList.add(R.drawable.plant_cucumber);
+        allImagePlantsArrayList.add(R.drawable.plant_eggplant);
+        allImagePlantsArrayList.add(R.drawable.plant_garlic);
+        allImagePlantsArrayList.add(R.drawable.plant_gia_lan);
+        allImagePlantsArrayList.add(R.drawable.plant_ginger);
+        allImagePlantsArrayList.add(R.drawable.plant_jerusalem_artichoke);
+        allImagePlantsArrayList.add(R.drawable.plant_kale);
+        allImagePlantsArrayList.add(R.drawable.plant_leek);
+        allImagePlantsArrayList.add(R.drawable.plant_lettuce);
+        allImagePlantsArrayList.add(R.drawable.plant_onion);
+        allImagePlantsArrayList.add(R.drawable.plant_pak_or_bok_choy);
+        allImagePlantsArrayList.add(R.drawable.plant_potato);
+        allImagePlantsArrayList.add(R.drawable.plant_pumpkin);
+        allImagePlantsArrayList.add(R.drawable.plant_radish_red);
+        allImagePlantsArrayList.add(R.drawable.plant_radish_white);
+        allImagePlantsArrayList.add(R.drawable.plant_shallot);
+        allImagePlantsArrayList.add(R.drawable.plant_silverbeet);
+        allImagePlantsArrayList.add(R.drawable.plant_snow_peas);
+        allImagePlantsArrayList.add(R.drawable.plant_spinach);
+        allImagePlantsArrayList.add(R.drawable.plant_sugar_snap_peas);
+        allImagePlantsArrayList.add(R.drawable.plant_sweet_corn);
+        allImagePlantsArrayList.add(R.drawable.plant_sweet_potato);
+        allImagePlantsArrayList.add(R.drawable.plant_tomato);
+        allImagePlantsArrayList.add(R.drawable.plant_turnip);
+        allImagePlantsArrayList.add(R.drawable.plant_wombok);
+        allImagePlantsArrayList.add(R.drawable.plant_zucchini);
     }
 }

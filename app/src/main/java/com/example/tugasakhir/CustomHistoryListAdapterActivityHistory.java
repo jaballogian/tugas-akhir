@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -15,11 +16,13 @@ public class CustomHistoryListAdapterActivityHistory extends BaseAdapter {
 
     Activity activity;
     String[] time, plant, location, ec, ph, intensity, flow;
-//    Integer[] image;
+    String[] splitterMinus, splitterSlash;
+    String year, month, day, clock;
+    Integer[] image;
     LayoutInflater layoutInflater;
 
     public CustomHistoryListAdapterActivityHistory (Activity activity,
-        String[] time, String[] plant, String[] location, String[] ec, String[] ph, String[] intensity, String[] flow){
+        String[] time, String[] plant, String[] location, String[] ec, String[] ph, String[] intensity, String[] flow, Integer[] image){
 
         this.activity = activity;
         this.time = time;
@@ -29,6 +32,7 @@ public class CustomHistoryListAdapterActivityHistory extends BaseAdapter {
         this.ph = ph;
         this.intensity = intensity;
         this.flow = flow;
+        this.image = image;
     }
 
     @Override
@@ -56,6 +60,7 @@ public class CustomHistoryListAdapterActivityHistory extends BaseAdapter {
         calligrapher.setFont(activity, "PRODUCT_SANS.ttf", true);
 
 //        CircleImageView plantImageView = (CircleImageView) view.findViewById(R.id.plantCircleImageViewCustomHistoryListAdapterActivityHistory);
+        ImageView plantImageView = (ImageView) view.findViewById(R.id.plantCircleImageViewCustomHistoryListAdapterActivityHistory);
         TextView timeTextView = (TextView) view.findViewById(R.id.timeTextViewCustomHistoryListAdapterActivityHistory);
         TextView locationTextView = (TextView) view.findViewById(R.id.locationTextViewCustomHistoryListAdapterActivityHistory);
         TextView plantTextView = (TextView) view.findViewById(R.id.plantTextViewCustomHistoryListAdapterActivityHistory);
@@ -64,8 +69,9 @@ public class CustomHistoryListAdapterActivityHistory extends BaseAdapter {
         TextView intensityTextView = (TextView) view.findViewById(R.id.intensityTextViewCustomHistoryListAdapterActivityHistory);
         TextView flowTextView = (TextView) view.findViewById(R.id.flowTextViewCustomHistoryListAdapterActivityHistory);
 
-//        plantImageView.setImageResource(image[position]);
-        timeTextView.setText(time[position]);
+        plantImageView.setImageResource(image[position]);
+
+        timeTextView.setText(splitter(time[position]));
         locationTextView.setText(location[position]);
         plantTextView.setText(plant[position]);
         ecTextView.setText(ec[position]);
@@ -74,5 +80,59 @@ public class CustomHistoryListAdapterActivityHistory extends BaseAdapter {
         flowTextView.setText(flow[position]);
 
         return view;
+    }
+
+    private String splitter (String input){
+
+        splitterMinus = input.split("-");
+        splitterSlash = splitterMinus[0].split(":");
+
+        day = splitterSlash[0];
+        year = splitterSlash[2];
+        clock = splitterMinus[1];
+
+        switch (splitterSlash[1]){
+
+            case "01":
+                month = "Jan";
+                break;
+            case "02":
+                month = "Feb";
+                break;
+            case "03":
+                month = "Mar";
+                break;
+            case "04":
+                month = "Apr";
+                break;
+            case "05":
+                month = "May";
+                break;
+            case "06":
+                month = "Jun";
+                break;
+            case "07":
+                month = "Jul";
+                break;
+            case "08":
+                month = "Aug";
+                break;
+            case "09":
+                month = "Sep";
+                break;
+            case "10":
+                month = "Oct";
+                break;
+            case "11":
+                month = "Nov";
+                break;
+            case "12":
+                month = "Dec";
+                break;
+        }
+
+        String output = day + " " + month + " " + year + " at " + clock;
+
+        return output;
     }
 }

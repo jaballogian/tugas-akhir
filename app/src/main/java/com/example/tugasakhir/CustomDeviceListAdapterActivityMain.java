@@ -30,7 +30,7 @@ public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
     Integer[] image;
     LayoutInflater layoutInflater;
 
-    public CustomDeviceListAdapterActivityMain (Activity activity, String[] deviceID, String[] location, String[] plant, String[] status, Integer[] image, String[] dates){
+    public CustomDeviceListAdapterActivityMain (Activity activity, String[] deviceID, String[] location, String[] plant, String[] status, Integer[] image){
 
         this.activity = activity;
         this.deviceID = deviceID;
@@ -38,7 +38,6 @@ public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
         this.plant = plant;
         this.status = status;
         this.image = image;
-        this.dates = dates;
     }
 
     @Override
@@ -74,41 +73,40 @@ public class CustomDeviceListAdapterActivityMain extends BaseAdapter {
 
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linearLayoutCustomDeviceListAdapterActivityMain);
         TextView textView = (TextView) view.findViewById(R.id.textViewCustomDeviceListAdapterActivityMain);
-        TextView timeTextView = (TextView) view.findViewById(R.id.timeTextViewCustomDeviceListAdapterActivityMain);
-        ImageView timeImageView = (ImageView) view.findViewById(R.id.timeImageViewCustomDeviceListAdapterActivityMain);
+//        TextView timeTextView = (TextView) view.findViewById(R.id.timeTextViewCustomDeviceListAdapterActivityMain);
+//        ImageView timeImageView = (ImageView) view.findViewById(R.id.timeImageViewCustomDeviceListAdapterActivityMain);
 
-
-        SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
-        Calendar calendar = Calendar.getInstance();
-        String dateAfterString = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH) + " " + Integer.valueOf(calendar.get(Calendar.MONTH) + 1) + " " + calendar.get(Calendar.YEAR));
-        String dateBeforeString = dates[position];
-
-        try {
-            Date dateBefore = myFormat.parse(dateBeforeString);
-            Date dateAfter = myFormat.parse(dateAfterString);
-            long difference = dateAfter.getTime() - dateBefore.getTime();
-            daysBetween = String.valueOf((int) (difference / (1000*60*60*24)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
+//        Calendar calendar = Calendar.getInstance();
+//        String dateAfterString = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH) + " " + Integer.valueOf(calendar.get(Calendar.MONTH) + 1) + " " + calendar.get(Calendar.YEAR));
+//        String dateBeforeString = dates[position];
+//
+//        try {
+//            Date dateBefore = myFormat.parse(dateBeforeString);
+//            Date dateAfter = myFormat.parse(dateAfterString);
+//            long difference = dateAfter.getTime() - dateBefore.getTime();
+//            daysBetween = String.valueOf((int) (difference / (1000*60*60*24)));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         deviceIDTextView.setText(deviceID[position]);
         plantTextView.setText(plant[position]);
         locationTextView.setText(location[position]);
         statusTextView.setText(status[position]);
         plantCircleImageView.setImageResource(image[position]);
-        timeTextView.setText(daysBetween);
+//        timeTextView.setText(daysBetween);
 
-        if(Integer.valueOf(daysBetween) == 0){
-
-            timeTextView.setTextColor(activity.getResources().getColor(R.color.red_A700));
-            timeImageView.setImageResource(R.drawable.ic_timelapse_red_24dp);
-        }
-        else if(Integer.valueOf(daysBetween) == 1){
-
-            timeTextView.setTextColor(activity.getResources().getColor(R.color.orange_A700));
-            timeImageView.setImageResource(R.drawable.ic_timelapse_orange_24dp);
-        }
+//        if(Integer.valueOf(daysBetween) == 0){
+//
+//            timeTextView.setTextColor(activity.getResources().getColor(R.color.red_A700));
+//            timeImageView.setImageResource(R.drawable.ic_timelapse_red_24dp);
+//        }
+//        else if(Integer.valueOf(daysBetween) == 1){
+//
+//            timeTextView.setTextColor(activity.getResources().getColor(R.color.orange_A700));
+//            timeImageView.setImageResource(R.drawable.ic_timelapse_orange_24dp);
+//        }
 
         return view;
     }

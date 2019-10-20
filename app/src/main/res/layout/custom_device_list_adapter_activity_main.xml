@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/statusTextViewCustomDeviceListAdapterActivityMain"
-                android:textColor="@color/grey_700"
+                android:textColor="@color/green_A700"
                 android:textSize="16sp"
                 android:text="@string/test"
                 android:layout_marginBottom="5dp"/>

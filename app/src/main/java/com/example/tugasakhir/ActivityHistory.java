@@ -24,11 +24,12 @@ public class ActivityHistory extends AppCompatActivity {
     private ListView historyListView;
     private TextView historyTextView;
     private Bundle readDataFromActivityDeviceDetail;
-    private String serialNumber, timeFromFirebase, ec, flow, intensity, location, ph, plant, allRegisteredPlants;
+    private String serialNumber, timeFromFirebase, ec, flow, intensity, location, ph, plant, allRegisteredPlants, containerVolume;
     private DatabaseReference historyReference, allRegisteredPlantsReference;
     private int totalUsed;
     private ArrayList<Integer> allImagePlantsArrayList, imageOwnedPlantArrayList;
-    private ArrayList<String> timeFromFirebaseArrayList, ecArraylist, flowArrayList, intensityArrayList, locationArrayList, phArrayList, plantArrayList, allRegisteredPlantsArrayList;
+    private ArrayList<String> timeFromFirebaseArrayList, ecArraylist, flowArrayList, intensityArrayList, locationArrayList, phArrayList, plantArrayList, allRegisteredPlantsArrayList,
+            containerVolumeArrayList;
     private CustomHistoryListAdapterActivityHistory customHistoryListAdapterActivityHistory;
     private ProgressDialog loading;
 
@@ -61,6 +62,7 @@ public class ActivityHistory extends AppCompatActivity {
         allImagePlantsArrayList = new ArrayList<Integer>();
         imageOwnedPlantArrayList = new ArrayList<Integer>();
         allRegisteredPlantsArrayList = new ArrayList<String>();
+        containerVolumeArrayList = new ArrayList<String>();
 
         readDevicesHistotyFromFirebase();
     }
@@ -86,6 +88,7 @@ public class ActivityHistory extends AppCompatActivity {
                     location = ds.child("location").getValue().toString();
                     ph = ds.child("ph").getValue().toString();
                     plant = ds.child("plant").getValue().toString();
+                    containerVolume = ds.child("containerVolume").getValue().toString();
 
                     ecArraylist.add(ec);
                     flowArrayList.add(flow);
@@ -93,6 +96,7 @@ public class ActivityHistory extends AppCompatActivity {
                     locationArrayList.add(location);
                     phArrayList.add(ph);
                     plantArrayList.add(plant);
+                    containerVolumeArrayList.add(containerVolume);
 
                     totalUsed++;
                 }
@@ -159,7 +163,8 @@ public class ActivityHistory extends AppCompatActivity {
                 phArrayList.toArray(new String[phArrayList.size()]),
                 intensityArrayList.toArray(new String[intensityArrayList.size()]),
                 flowArrayList.toArray(new String[flowArrayList.size()]),
-                imageOwnedPlantArrayList.toArray(new Integer[imageOwnedPlantArrayList.size()]));
+                imageOwnedPlantArrayList.toArray(new Integer[imageOwnedPlantArrayList.size()]),
+                containerVolumeArrayList.toArray(new String[containerVolumeArrayList.size()]));
         historyListView.setAdapter(customHistoryListAdapterActivityHistory);
 
         loading.dismiss();

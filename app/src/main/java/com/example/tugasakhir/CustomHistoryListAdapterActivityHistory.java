@@ -9,20 +9,22 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.anwarshahriar.calligrapher.Calligrapher;
 
 public class CustomHistoryListAdapterActivityHistory extends BaseAdapter {
 
     Activity activity;
-    String[] time, plant, location, ec, ph, intensity, flow;
+    String[] time, plant, location, ec, ph, intensity, flow, containerVolume;
     String[] splitterMinus, splitterSlash;
     String year, month, day, clock;
     Integer[] image;
     LayoutInflater layoutInflater;
 
     public CustomHistoryListAdapterActivityHistory (Activity activity,
-        String[] time, String[] plant, String[] location, String[] ec, String[] ph, String[] intensity, String[] flow, Integer[] image){
+        String[] time, String[] plant, String[] location, String[] ec, String[] ph, String[] intensity, String[] flow, Integer[] image, String[] containerVolume){
 
         this.activity = activity;
         this.time = time;
@@ -33,6 +35,7 @@ public class CustomHistoryListAdapterActivityHistory extends BaseAdapter {
         this.intensity = intensity;
         this.flow = flow;
         this.image = image;
+        this.containerVolume = containerVolume;
     }
 
     @Override
@@ -68,6 +71,7 @@ public class CustomHistoryListAdapterActivityHistory extends BaseAdapter {
         TextView phTextView = (TextView) view.findViewById(R.id.phTextViewCustomHistoryListAdapterActivityHistory);
         TextView intensityTextView = (TextView) view.findViewById(R.id.intensityTextViewCustomHistoryListAdapterActivityHistory);
         TextView flowTextView = (TextView) view.findViewById(R.id.flowTextViewCustomHistoryListAdapterActivityHistory);
+        TextView containerVolumeTextView = (TextView) view.findViewById(R.id.containerVolumeTextViewCustomHistoryListAdapterActivityHistory);
 
         plantImageView.setImageResource(image[position]);
 
@@ -78,6 +82,7 @@ public class CustomHistoryListAdapterActivityHistory extends BaseAdapter {
         phTextView.setText(ph[position]);
         intensityTextView.setText(intensity[position]);
         flowTextView.setText(flow[position]);
+        containerVolumeTextView.setText(containerVolume[position]);
 
         return view;
     }

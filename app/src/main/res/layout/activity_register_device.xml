@@ -88,6 +88,23 @@
                 android:textSize="20sp"
                 android:textColorHint="@color/black"
                 android:textColor="@color/green_A700"
+                android:layout_marginBottom="10dp"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/volumeEditTextActivityRegisterDevice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/volume"
+                android:inputType="numberDecimal"
+                android:paddingRight="10dp"
+                android:textSize="20sp"
+                android:textColorHint="@color/black"
+                android:textColor="@color/green_A700"
                 android:layout_marginBottom="50dp"/>
         </android.support.design.widget.TextInputLayout>
 

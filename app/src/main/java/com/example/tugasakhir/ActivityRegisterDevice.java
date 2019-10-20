@@ -36,10 +36,10 @@ import me.anwarshahriar.calligrapher.Calligrapher;
 
 public class ActivityRegisterDevice extends AppCompatActivity {
 
-    private EditText serialNumberEditText, passwordEditText, locationEditText;
+    private EditText serialNumberEditText, passwordEditText, locationEditText, volumeEditText;
     private TextView dontHaveADeviceTextView;
     private Button registerButton;
-    private String serialNumberFromUser, passwordFromUser, locationFromUser, serialNumberFromFirebase, passwordFromFirebase, uID, selectedPlant, plantFromFirebase;
+    private String serialNumberFromUser, passwordFromUser, locationFromUser, serialNumberFromFirebase, passwordFromFirebase, uID, selectedPlant, plantFromFirebase, initialVolume;
     private DatabaseReference devicesReference, databaseReference, plantReference;
     private ArrayList<String> serialNumberArrayList, passwordArrayList, plantArrayList;
     private ArrayAdapter<String> plantAdapter;
@@ -68,6 +68,7 @@ public class ActivityRegisterDevice extends AppCompatActivity {
         registerButton = (Button) findViewById(R.id.registerButtonActivityRegisterDevice);
         selectPlantSpinner = (Spinner) findViewById(R.id.selectPlantSpinnerActivityRegister);
         locationEditText = (EditText) findViewById(R.id.locationEditTextActivityRegisterDevice);
+        volumeEditText = (EditText) findViewById(R.id.volumeEditTextActivityRegisterDevice);
 
         spannableString = new SpannableString(getString(R.string.dont_have_a_device_buy_here));
         spannableStringBuilder = new SpannableStringBuilder(getString(R.string.dont_have_a_device_buy_here));
@@ -145,11 +146,13 @@ public class ActivityRegisterDevice extends AppCompatActivity {
         serialNumberFromUser = serialNumberEditText.getText().toString();
         passwordFromUser = passwordEditText.getText().toString();
         locationFromUser = locationEditText.getText().toString();
+        initialVolume = volumeEditText.getText().toString();
+
     }
 
     private void checkAllFields(){
 
-        if(serialNumberFromUser.isEmpty() || passwordFromUser.isEmpty() || selectedPlant.isEmpty() || locationFromUser.isEmpty()){
+        if(serialNumberFromUser.isEmpty() || passwordFromUser.isEmpty() || selectedPlant.isEmpty() || locationFromUser.isEmpty() || initialVolume.isEmpty()){
 
             Toast.makeText(ActivityRegisterDevice.this, getString(R.string.please_fill_all_the_fields), Toast.LENGTH_LONG).show();
         }
@@ -239,6 +242,7 @@ public class ActivityRegisterDevice extends AppCompatActivity {
 
         devicesReference.child(serialNumberFromUser).child("plant").setValue(selectedPlant);
         devicesReference.child(serialNumberFromUser).child("location").setValue(locationFromUser);
+        devicesReference.child(serialNumberFromUser).child("initVolume").setValue(initialVolume);
 
         databaseReference.setValue("true").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

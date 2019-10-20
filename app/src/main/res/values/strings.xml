@@ -62,6 +62,7 @@
     <string name="ph">pH</string>
     <string name="light">Light</string>
     <string name="flow">Flow</string>
+    <string name="volume">Volume</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

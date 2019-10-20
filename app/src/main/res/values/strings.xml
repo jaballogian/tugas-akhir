@@ -62,7 +62,8 @@
     <string name="ph">pH</string>
     <string name="light">Light</string>
     <string name="flow">Flow</string>
-    <string name="volume">Volume</string>
+    <string name="container_volume">Container Volume</string>
+    <string name="container_volume_in_liters">Container Volume (in Liters) :</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

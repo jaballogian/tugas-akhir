@@ -99,7 +99,7 @@
                 android:id="@+id/volumeEditTextActivityRegisterDevice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/volume"
+                android:hint="@string/container_volume"
                 android:inputType="numberDecimal"
                 android:paddingRight="10dp"
                 android:textSize="20sp"

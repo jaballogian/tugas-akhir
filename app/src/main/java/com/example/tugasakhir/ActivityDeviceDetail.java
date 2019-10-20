@@ -23,10 +23,10 @@ public class ActivityDeviceDetail extends AppCompatActivity {
 
 //    private CircleImageView plantCircleImageView;
     private ImageView plantCircleImageView;
-    private TextView serialNumberTextView, plantTextView, locationTextView, statusTextView, yourEcTextView, yourPhTextView, yourFlowTextView, yourIntensityTextView;
+    private TextView serialNumberTextView, plantTextView, locationTextView, statusTextView, yourEcTextView, yourPhTextView, yourFlowTextView, yourIntensityTextView, containerVolumeTextView;
     private TextView optimalEcTextView, optimalPhTextView, optimalIntensityTextView, optimalFlowTextView;
     private Bundle readDataFromActivityMain;
-    private String serialNumber, location, plant, status, password;
+    private String serialNumber, location, plant, status, password, containerVolume;
     private double ec, flow, intensity, ph, minec, maxec, minph, maxph, minflow, maxflow, minint, maxint;
     private int image;
     private DatabaseReference selectedDeviceReference, optimalParameterReference;
@@ -55,6 +55,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
         optimalFlowTextView = (TextView) findViewById(R.id.optimalFlowTextViewActivityDeviceDetail);
         settingImageButton = (ImageButton) findViewById(R.id.settingImageButtonActivityDeviceDetail);
         historyImageButton = (ImageButton) findViewById(R.id.historyImageButtonActivityDeviceDetail);
+        containerVolumeTextView = (TextView) findViewById(R.id.containerVolumeTextViewActivityDeviceDetail);
 
         readDataFromActivityMain = getIntent().getExtras();
         serialNumber = readDataFromActivityMain.getString("serialNumber");
@@ -108,6 +109,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
                 plant = dataSnapshot.child("plant").getValue().toString();
                 status = dataSnapshot.child("status").getValue().toString();
                 password = dataSnapshot.child("password").getValue().toString();
+                containerVolume = dataSnapshot.child("containerVolume").getValue().toString();
 
                 readOptimalParametersFromDatabase();
             }
@@ -129,6 +131,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
         yourPhTextView.setText(String.valueOf(ph));
         plantTextView.setText(plant);
         statusTextView.setText(status);
+        containerVolumeTextView.setText(containerVolume);
 
         optimalEcTextView.setText(String.valueOf(minec) + " - " + String.valueOf(maxec));
         optimalPhTextView.setText(String.valueOf(minph) + " - " + String.valueOf(maxph));

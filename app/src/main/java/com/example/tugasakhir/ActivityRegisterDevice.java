@@ -242,7 +242,7 @@ public class ActivityRegisterDevice extends AppCompatActivity {
 
         devicesReference.child(serialNumberFromUser).child("plant").setValue(selectedPlant);
         devicesReference.child(serialNumberFromUser).child("location").setValue(locationFromUser);
-        devicesReference.child(serialNumberFromUser).child("initVolume").setValue(initialVolume);
+        devicesReference.child(serialNumberFromUser).child("containerVolume").setValue(initialVolume);
 
         databaseReference.setValue("true").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

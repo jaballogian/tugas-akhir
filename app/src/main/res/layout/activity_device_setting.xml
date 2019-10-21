@@ -83,6 +83,25 @@
                 android:textSize="18sp"
                 android:textColorHint="@color/black"
                 android:textColor="@color/green_A700"
+                android:layout_marginBottom="10dp"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/containerVolumeEditTextActivityDeviceSetting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/container_volume"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="18sp"
+                android:textColorHint="@color/black"
+                android:textColor="@color/green_A700"
                 android:layout_marginBottom="20dp"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -92,7 +111,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:background="@drawable/rounded_rectangle_green"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:text="@string/save"
             android:id="@+id/saveButtonActivityDeviceSetting"/>
 

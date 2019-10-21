@@ -92,6 +92,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
         toActivityDeviceSetting.putExtra("plant", plant);
         toActivityDeviceSetting.putExtra("location", location);
         toActivityDeviceSetting.putExtra("password", password);
+        toActivityDeviceSetting.putExtra("containerVolume", containerVolume);
         startActivity(toActivityDeviceSetting);
     }
 

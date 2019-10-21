@@ -35,10 +35,10 @@ public class ActivityDeviceSetting extends AppCompatActivity {
     private TextView serialNumberTextView, showPasswordTextView;
     private ImageView plantImageView;
     private Spinner selectPlantSpinner;
-    private EditText locationEditText;
+    private EditText locationEditText, containerVolumeEditText;
     private Button saveButton;
     private Bundle readDataFromActivityDeviceDetail;
-    private String serialNumber, plantFromFirebase, selectedPlant, plant, location, password, showPasswordString, allRegisteredPlants;
+    private String serialNumber, plantFromFirebase, selectedPlant, plant, location, password, showPasswordString, allRegisteredPlants, containerVolume;
     private int image, j;
     private DatabaseReference plantReference, selectedDeviceReference, allRegisteredPlantsReference;
     private ArrayList<String> plantArrayList, allRegisteredPlantsArrayList;
@@ -62,6 +62,7 @@ public class ActivityDeviceSetting extends AppCompatActivity {
         locationEditText = (EditText) findViewById(R.id.locationEditTextActivityDeviceSetting);
         saveButton = (Button) findViewById(R.id.saveButtonActivityDeviceSetting);
         showPasswordTextView = (TextView) findViewById(R.id.showPasswordTextViewActivityDeviceSetting);
+        containerVolumeEditText = (EditText) findViewById(R.id.containerVolumeEditTextActivityDeviceSetting);
 
         readDataFromActivityDeviceDetail = getIntent().getExtras();
         serialNumber = readDataFromActivityDeviceDetail.getString("serialNumber");
@@ -69,6 +70,7 @@ public class ActivityDeviceSetting extends AppCompatActivity {
         plant = readDataFromActivityDeviceDetail.getString("plant");
         location = readDataFromActivityDeviceDetail.getString("location");
         password = readDataFromActivityDeviceDetail.getString("password");
+        containerVolume = readDataFromActivityDeviceDetail.getString("containerVolume");
 
         allImagePlantsArrayList = new ArrayList<Integer>();
         allRegisteredPlantsArrayList = new ArrayList<String>();
@@ -80,6 +82,7 @@ public class ActivityDeviceSetting extends AppCompatActivity {
         serialNumberTextView.setText(serialNumber);
         plantImageView.setImageResource(image);
         locationEditText.setText(location);
+        containerVolumeEditText.setText(containerVolume);
 
         readAllPlantsFromFirebase();
 
@@ -202,8 +205,9 @@ public class ActivityDeviceSetting extends AppCompatActivity {
     private void checkAllFields(){
 
         location = locationEditText.getText().toString();
+        containerVolume = containerVolumeEditText.getText().toString();
 
-        if(selectedPlant.isEmpty() || location.isEmpty()){
+        if(selectedPlant.isEmpty() || location.isEmpty() || containerVolume.isEmpty()){
 
             Toast.makeText(ActivityDeviceSetting.this, getString(R.string.please_fill_all_the_fields), Toast.LENGTH_LONG).show();
         }
@@ -223,6 +227,7 @@ public class ActivityDeviceSetting extends AppCompatActivity {
     private void saveDataToFirebase(){
 
         selectedDeviceReference.child("plant").setValue(selectedPlant);
+        selectedDeviceReference.child("containerVolume").setValue(containerVolume);
         selectedDeviceReference.child("location").setValue(location).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

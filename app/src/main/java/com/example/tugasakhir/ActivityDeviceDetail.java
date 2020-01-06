@@ -25,8 +25,9 @@ public class ActivityDeviceDetail extends AppCompatActivity {
     private ImageView plantCircleImageView;
     private TextView serialNumberTextView, plantTextView, locationTextView, statusTextView, yourEcTextView, yourPhTextView, yourFlowTextView, yourIntensityTextView, containerVolumeTextView;
     private TextView optimalEcTextView, optimalPhTextView, optimalIntensityTextView, optimalFlowTextView;
+    private TextView suggesttionTextView;
     private Bundle readDataFromActivityMain;
-    private String serialNumber, location, plant, status, password, containerVolume;
+    private String serialNumber, location, plant, status, password, containerVolume, suggestion;
     private double ec, flow, intensity, ph, minec, maxec, minph, maxph, minflow, maxflow, minint, maxint;
     private int image;
     private DatabaseReference selectedDeviceReference, optimalParameterReference;
@@ -56,6 +57,7 @@ public class ActivityDeviceDetail extends AppCompatActivity {
         settingImageButton = (ImageButton) findViewById(R.id.settingImageButtonActivityDeviceDetail);
         historyImageButton = (ImageButton) findViewById(R.id.historyImageButtonActivityDeviceDetail);
         containerVolumeTextView = (TextView) findViewById(R.id.containerVolumeTextViewActivityDeviceDetail);
+        suggesttionTextView = (TextView) findViewById(R.id.suggesttionTextViewActivityDeviceDetail);
 
         readDataFromActivityMain = getIntent().getExtras();
         serialNumber = readDataFromActivityMain.getString("serialNumber");
@@ -143,6 +145,8 @@ public class ActivityDeviceDetail extends AppCompatActivity {
         setBackgroundColorTextView(yourPhTextView, ph, minph, maxph);
         setBackgroundColorTextView(yourFlowTextView, flow, minflow, maxflow);
         setBackgroundColorTextView(yourIntensityTextView, intensity, minint, maxint);
+
+        givingSuggestion(ec, minec, maxec, ph, minph, maxph, flow, minflow, maxflow, intensity, minint, maxint);
     }
 
     private void readOptimalParametersFromDatabase(){
@@ -189,5 +193,42 @@ public class ActivityDeviceDetail extends AppCompatActivity {
         Intent toActivityHistory = new Intent(this, ActivityHistory.class);
         toActivityHistory.putExtra("serialNumber", serialNumber);
         startActivity(toActivityHistory);
+    }
+
+    private void givingSuggestion(double inputEc, double minimumEc, double maximumEc, double inputPh, double minimumPh, double maximumPh, double inputFlow, double minimumFlow, double maximumFlow,
+                                  double inputInt, double minimumInt, double maximumInt){
+
+        Log.d("suggestionMsg", "gak terpanggil");
+
+        suggestion = "";
+
+        if(inputEc < minimumEc || inputEc > maximumEc){
+
+            suggestion = suggestion + getString(R.string.ec_is_not_in_optimal_range) + "\n";
+        }
+
+        if(inputPh < minimumPh || inputPh > maximumPh){
+
+            suggestion = suggestion + getString(R.string.ph_is_not_in_optimal_range) + "\n";
+        }
+
+        if(inputFlow < minimumFlow || inputFlow > maximumFlow){
+
+            suggestion = suggestion + getString(R.string.flow_is_not_in_optimal_range) + "\n";
+        }
+
+        if(inputInt < minimumInt || inputInt > maximumInt){
+
+            suggestion = suggestion + getString(R.string.intensity_is_not_in_optimal_range) + "\n";
+        }
+
+        if(suggestion.equals("")){
+
+            suggesttionTextView.setText(getString(R.string.nft_is_optimum));
+        }
+        else {
+
+            suggesttionTextView.setText(suggestion);
+        }
     }
 }

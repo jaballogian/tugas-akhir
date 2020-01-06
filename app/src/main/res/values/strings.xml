@@ -64,6 +64,11 @@
     <string name="flow">Flow</string>
     <string name="container_volume">Container Volume</string>
     <string name="container_volume_in_liters">Container Volume (in Liters) :</string>
+    <string name="ec_is_not_in_optimal_range">EC is not in optimal range. Turn the hardware on!</string>
+    <string name="ph_is_not_in_optimal_range">pH is not in optimal range. Turn the hardware on!</string>
+    <string name="flow_is_not_in_optimal_range">Water flow is not in optimal range. Change your water pump or try raising or lowering the degree slope of NFT!</string>
+    <string name="intensity_is_not_in_optimal_range">Light intensity is not in optimal range. Turn on the lamp or change the light bulb!</string>
+    <string name="nft_is_optimum">NFT is optimum</string>
 
     <string-array name="select_gender_array">
         <item>@string/select_gender</item>

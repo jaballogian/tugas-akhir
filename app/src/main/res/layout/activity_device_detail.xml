@@ -483,7 +483,8 @@
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
                 android:text="@string/test"
-                android:textColor="@color/grey_700"/>
+                android:id="@+id/suggesttionTextViewActivityDeviceDetail"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 
